@@ -12,28 +12,38 @@ runtime: shiny_prerendered
 library(learnr)
 library(tutorial.helpers)
 
-# custom functions
-expand_variants <- function(base_forms)
-  {
-  variants <- unique(unlist(lapply(base_forms, function(x) {
-    c(x, tolower(x), toupper(x), stringr::str_to_title(x))
-  })))
-  return(variants)
+custom_question_text <- function(text, 
+                                 variants,
+                                 correct_msg = "Super, das ist richtig!",
+                                 incorrect_msg = "Leider nicht richtig.", 
+                                 allow_retry = FALSE,
+                                 placeholder = "Antwort eingeben...") {
+  
+  check_answer <- function(value, variants) {
+    
+    normalized_value <- tolower(value) |>
+      trimws() |> 
+      gsub("[[:punct:]]+", "", x = _)
+    
+    if (normalized_value %in% tolower(variants)) {
+      return(mark_as(TRUE))
+    }
+    return(mark_as(FALSE))
+  }
+
+  # https://github.com/rstudio/learnr/discussions/797
+  formals(check_answer)$variants <- variants
+  
+  question_text(
+    text,
+    answer_fn(check_answer),
+    correct = correct_msg,
+    incorrect = incorrect_msg,
+    allow_retry = allow_retry,
+    placeholder = placeholder
+  )
 }
 
-custom_question_text <- function(text, variants, correct_msg="Super, das ist richtig!", incorrect_msg="Leider nicht richtig.", allow_retry = TRUE, placeholder="Antwort eingeben...") {
-  variants = expand_variants(variants)
-  do.call(question_text, c(
-    list(text),
-    lapply(variants, answer, correct = TRUE),
-    list(
-      correct = correct_msg,
-      incorrect = incorrect_msg,
-      allow_retry = allow_retry, 
-      placeholder = placeholder
-    )
-  ))
-}
 
 knitr::opts_chunk$set(echo = FALSE)
 ```
