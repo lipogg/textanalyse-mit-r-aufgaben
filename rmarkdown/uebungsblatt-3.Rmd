@@ -1,0 +1,84 @@
+---
+title: "Übungsblatt Nr. 3"
+author: "Textanalyse mit R WiSe 24/25 - Lisa Poggel"
+date: "Abgabe bis 11.11.2024, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
+output: #pdf_document
+  pdf_document:
+    latex_engine: xelatex # für Unicode chars
+header-includes:
+  - \usepackage{fontspec}
+  - \setmonofont{Arial Unicode MS}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+**Aufgabe 1: Wiederholung**
+
+Lest euch nochmal die Inhalte zur Sitzung gestern unter dem neuen Kapitel “R Basics II” auf unserer Kurswebsite durch. Formuliert eine Frage zu einem Inhalt, der euch noch nicht ganz klar ist.
+
+\vspace{2mm}
+
+**Aufgabe 2: Verständnis**
+
+1.) Welche Datenstrukturen werden durch die Bilder a), b) und c) repräsentiert? 
+
+![](uebung03-sose24.png)
+
+2.) Welche Datenstruktur kann am besten zur Abbildung der folgenden Daten verwendet werden? Zur Beantwortung der Frage müsst ihr nur die Datenstruktur nennen, ihr müsst die Beispiele nicht in R implementieren. 
+
+- Buchtitel auf der Booker Prize Longlist 2023 
+- Informationen zu allen Kunstwerken, die im Louvre ausgestellt werden: jeweils Titel, Künstler:in, Jahr, und die Information, ob die Kunstwerke gerade verliehen sind oder nicht.
+- Informationen zu einem einzigen historischen Ereignis: Startpunkt, Endpunkt, beteiligte historische Personen und URLs zu Online-Publikationen über das Ereignis. 
+- Häufigkeit von Worten in verschiedenen Texten: Wie oft kommt dasselbe Wort in verschiedenen Texten vor? 
+
+Tipp: Wenn ihr nicht darauf kommt, überlegt euch zuerst, welchen Datentyp und ggf. welche Datenstruktur die Elemente der Datenstruktur haben: Sind die Elemente alle vom selben Typ? Sind sie alle gleich groß? Wenn ihr immer noch nicht darauf kommt, könnt ihr euch die Datenstruktur auch auf einem Blatt Papier aufzeichnen und die Daten eintragen. So stellt sich schnell heraus, ob die Datenstruktur geeignet ist.
+
+2.) Wenn z.B. in einem Dataframe Daten fehlen, dann kann man dies kenntlich machen, indem man ein spezielles Objekt einsetzt. Welches Objekt? 
+
+a) NULL; b) NA; c) NaN; d) NICHTS
+
+\vspace{2mm}
+
+**Aufgabe 3: Praxis** 
+
+1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nummer des Übungsblatts und den Namen aller Bearbeiter:innen. 
+
+2.) Kopiert den folgenden Code in euer R-Skript und führt alle Zeilen aus: 
+
+```{r}
+df <- data.frame(
+  autor_in = c("Oksana Zabuzhko", "Tamta Melashvili", "Aigerim Tazhi", "Marine Petrossian"),
+  werk = c("Музей покинутих секретів", "გათვლა", "БОГ-О-СЛОВ", "Բանաստեղծություններ, առաջին գիրք"), 
+  jahr = c(2013, 2011, 2004, 1993),
+  preis = c("Angelus Award", "Saba Literary Award", "Stupeni Award", NA),
+  preisjahr = c(2013, 2011, 2003, NA),
+  genre = c("Prosa", "Prosa", "Lyrik", "Lyrik")
+)
+  
+```
+
+3.) Greift auf die Spalte `preis` zu. 
+
+4.) Greift auf das Element in der ersten Spalte und der dritten Zeile zu und lasst es euch auf dem Bildschirm ausgeben. 
+
+5.) Greift auf alle Elemente in der Spalte `werk` zu, für die in der Spalte `jahr` der Wert 2011 eingetragen ist. Hinweis: Wenn ihr euch nicht mehr daran erinnert, wie das geht, ist das gar nicht schlimm. Schaut einfach in Kapitel 2.7.1 auf der Kurswebsite nach. 
+
+6.) Fügt eine neue Spalte hinzu. Die Spalte soll Wahrheitswerte enthalten: TRUE, wenn ihr das Buch gelesen habt, und FALSE, wenn ihr das Buch nicht gelesen habt. Wenn ihr das Übungsblatt zu zweit bearbeitet, tragt TRUE ein, wenn eine:r von euch das Buch gelesen hat.
+
+7.) Verwendet die Funktion `is.na()` um herauszufinden, ob es in der Spalte `preisjahr` fehlende Werte gibt. 
+
+8.) Ihr sollt jetzt herausfinden, wie viele Werke dem Genre "Prosa" zugehören. Greift dazu erst auf alle Elemente in der Spalte `genre` zu, für die in der Spalte `genre` "Prosa" steht und weist die Elemente einer neuen Variable `prosa` zu. Lasst euch dann mithilfe der Funktion `length()` die Länge des Objekts `prosa` ausgeben: Das ist die Anzahl der Prosawerke! 
+
+9.) Erstellt zuletzt einen neuen Dataframe mit drei Spalten, der eure drei Lieblingsbücher, die Autor_innen und die Publikationsjahre enthält. Weist den Dataframe einer Variable mit einem geeigneten Namen zu. Tipp: Wie ihr am Beispiel oben gesehen habt, können die   Einträge in dem Dataframe auch in nicht-lateinischen Schriften verfasst sein.  
+
+
+
+
+
+
+
+

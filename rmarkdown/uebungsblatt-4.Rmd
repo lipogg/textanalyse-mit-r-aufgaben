@@ -1,0 +1,118 @@
+---
+title: "Übungsblatt Nr. 4"
+author: "Textanalyse mit R WiSe 24/25 - Lisa Poggel"
+date: "Abgabe bis 18.11.2024, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+**Aufgabe 1: Wiederholung**
+
+Lest euch nochmal die Inhalte zur Sitzung heute unter dem neuen Kapitel “R Basics III” auf unserer Kurs-Website durch. Formuliert eine Frage zu einem Inhalt, der euch noch nicht ganz klar ist.
+
+\vspace{2mm}
+
+**Aufgabe 2: Verständnis**
+
+1.) Welche ist die korrekte Syntax für den Schleifenkopf einer for-Schleife?
+
+a) for(variable in objekt)
+b) for (variable in objekt) 
+c) for variable in objekt 
+d) for bedingung 
+
+
+2.) Welche Syntax ist korrekt für den Schleifenkopf einer while-Schleife? 
+
+a) while variable in objekt 
+b) while bedingung 
+c) while(bedingung) 
+d) while (bedingung)
+
+
+3.) Was ist der Unterschied zwischen der for-Schleife und der while-Schleife? Überlegt euch je ein Beispiel für eine Situation, in der eine for-Schleife bzw. eine while-Schleife geeigneter ist.
+
+4.) Was wird jeweils im dritten Schleifendurchlauf ausgegeben? Beantwortet die Frage ohne die Hilfe von R und RStudio!
+
+a) 
+
+```{r eval=FALSE}
+blumen <- c("Tulpe", "Rose", "Narzisse", "Geranie")
+
+for (blume in blumen) {
+  print(blume)
+}
+```
+
+b)
+
+```{r eval=FALSE}
+blumen <- c("Tulpe", "Rose", "Narzisse", "Geranie")
+
+for (i in seq_along(blumen)) {
+  print(i)
+  print(blumen[i])
+}
+```
+
+5.) Stellt euch folgende Situation vor: In eurer Freizeit geht ihr gerne zu Starbucks und trinkt einen Frappuchino, der aktuell 8€ kostet. Ihr habt ein Nettoeinkommen von 900€. Diesen Monat habt ihr schon 650€ für Miete, Essen, Internet und Sonstiges ausgegegeben. Da sowohl der Frappuchinopreis als auch eure monatlichen Ausgaben und natürlich das aktuelle Datum variieren, habt ihr ein kleines Skript geschrieben, das euch die Planung eures Frappuchinokonsums erleichtern soll. Was macht der folgende Code? Beschreibt in euren eigenen Worten, was in jeder Zeile passiert. Ihr dürft den Code zum Verständnis auch im RStudio ausführen und einzelne Werte ändern oder euch in jedem Durchlauf der while-Schleife den Wert der Variablen ausgeben lassen. 
+
+```{r eval=FALSE}
+einkommen <- 900
+ausgaben <- 650
+kaffeepreis <- 8
+frappuchinos <- 0
+datum <- list(12, "Mai")
+lange_monate <- c("Januar", "März", "Mai", "Juli", "August", "Oktober", "Dezember")
+kurze_monate <- c("April", "Juni", "September", "November")
+
+if (datum[[2]] %in% lange_monate) {
+  tage <- 31 - datum[[1]]
+} else if (datum[[2]] %in% kurze_monate) {
+  tage <- 30 - datum[[1]]
+} else {
+  tage <- 28 - datum[[1]]
+}
+
+while ((einkommen - ausgaben) > kaffeepreis) {
+  ausgaben <- ausgaben + kaffeepreis
+  frappuchinos <- frappuchinos + 1
+}
+
+nachricht <- paste("Du kannst diesen Monat noch", frappuchinos, 
+  "Frappuchinos trinken. Das sind", frappuchinos / tage, "Frappuchinos am Tag.")
+print(nachricht)
+
+```
+
+Tipp: Wenn ihr Schwierigkeiten habt zu verstehen, was im Code passiert, dann beschreibt laut, was in jeder Zeile passiert, so, wie wir es in der Stunde geübt haben.  
+
+\vspace{2mm}
+
+**Aufgabe 3: Praxis** 
+
+1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nummer des Übungsblatts und den Namen aller Bearbeiter:innen. 
+
+2.) Erstellt einen Vektor mit den Namen eurer Lieblingsmusiker:innen als Elemente. Überprüft mithilfe einer if-Anweisung, ob die Zeichenkette "Rihanna" im Vektor enthalten ist. Falls die Zeichenkette enthalten ist, soll die Nachricht "Rihanna ist eine meiner Lieblingskünstlerinnen" auf dem Bildschirm ausgegeben werden.
+
+3.) Überprüft jetzt mithilfe einer weiteren if-Anweisung, ob der Wert des zweiten Elements in dem Vektor mit euren Lieblingsmusiker:innen der Zeichenkette "Mozart" entspricht. Falls diese Bedingung erfüllt ist, soll die Zeichenkette "Mozart" durch die Zeichenkette "Chopin" ersetzt werden. Falls die Bedingung nicht erfüllt ist, soll dem Vektor ein neues Element mit dem Wert "Chopin" hinzugefügt werden. 
+
+4.) Erstellt einen leeren Vektor und weist ihn der Variable `laenge` zu.
+
+5.) Erstellt jetzt eine Schleife, die in jedem Schleifendurchgang die Länge der Namen eurer Lieblingsmusiker:innen aus dem Vektor mit euren Lieblingsmusiker:innen bestimmt und die Wortlänge als Element dem Vektor `laenge` hinzufügt. 
+
+> Hinweis: Zur Bestimmung der Anzahl von Zeichen in Zeichenketten könnt ihr die Funktion `nchar()` verwenden. Ein Element kann einem Vektor hinzugefügt werden, indem der Vektor mit dem neuen Element in einen neuen Vektor kombiniert wird: `neuer_vektor <- c(alter_vektor, neues_element)`.
+
+
+
+
+
+
+
+
+

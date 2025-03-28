@@ -1,0 +1,106 @@
+---
+title: "Übungsblatt Nr. 5"
+author: "Textanalyse mit R WiSe 24/25 - Lisa Poggel"
+date: "Abgabe bis 25.11.2024, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
+output: pdf_document
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+**Aufgabe 1: Wiederholung**
+
+1.) Lest euch nochmal die neuen Inhalte zur Sitzung heute unter dem neuen Kapitel “R Basics IV” auf unserer Kurs-Website durch. Lest dabei die neuen Abschnitte ab "Gültigkeit der Funktionsargumente überprüfen" besonders gründlich und formuliert eine Frage zu einem Inhalt, der euch noch nicht ganz klar ist. 
+
+
+\vspace{4mm}
+
+**Aufgabe 2: Verständnis**
+
+1.) Was sind Funktionsname, Parameter, Funktionskörper und Rückgabewert der folgenden Funktionen? Zur Erinnerung: `%%` ist der modulo-Operator. Er berechnet den Rest bei einer Division. 
+
+\vspace{4mm}
+
+```{r}
+# Funktion 1
+ist_gerade <- function(zahl) {
+  if (zahl %% 2 == 0) {
+    print("Zahl ist gerade")
+    return(NULL)
+  } else {
+    print("Zahl ist ungerade")
+    return(NULL)
+  }
+}
+
+```
+
+```{r}
+# Funktion 2
+ist_gerade <- function(zahl) {
+  if (zahl %% 2 == 0) {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
+```
+
+```{r}
+# Funktion 3
+ist_gerade <- function(zahl) {
+  gerade <- zahl %% 2 == 0
+  return(gerade)
+}
+
+```
+
+```{r}
+# Funktion 4
+ist_gerade <- function(zahl) {
+  zahl %% 2 == 0
+}
+
+```
+
+
+\vspace{20mm}
+
+2.) Was passiert im folgenden Code? Geht davon aus, dass die Funktion mit der Definition 2, 3 oder 4 aufgerufen wird. 
+
+```{r eval = FALSE}
+ist_gerade(3)
+zahl <- 8
+zahl_gerade <- ist_gerade(zahl)
+if (zahl_gerade) {
+  zahl / 2
+}
+```
+
+
+3.) Verkettet die folgenden Funktionsaufrufe mit dem Pipe-Operator. Der Pipe-Operator wird auf der Kurswebsite im Abschnitt 4.13 vorgestellt. Hinweis: Um den Pipe-Operator zu verwenden, müsst ihr erst das Paket magrittr laden. Wenn ihr das Paket noch nicht installiert habt, müsst ihr es erst installieren. 
+
+```{r eval=FALSE}
+woerter <- c("Haus", "Baum", "Sonne", "Gras") 
+anzahl_buchstaben <- sum(nchar(c(woerter, "Blumen")))
+```
+
+**Aufgabe 3: Praxis** 
+
+1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nummer des Übungsblatts und euren Namen.  
+
+2.) Definiert eine Funktion mit dem Namen `increment_vector`, die einen Vektor als Argument annimmt und im Funktionskörper alle Elemente des Vektors mit 1 addiert. Der so "inkrementierte" Vektor soll zuletzt als Rückgabewert zurückgegeben werden. Hinweis: Bei der Addition könnt ihr euch wieder das Prinzip der Vektorisierung zunutze machen. 
+
+3.) Ruft eure Funktion `increment_vector` mit einem beliebigen numeric-Vektor als Argument auf. 
+
+4.) Ihr wollt jetzt eure Funktion `increment_vector` verbessern: Es kann schließlich sein, dass beim Funktionsaufruf ein Argument übergeben wird, das kein Zahlenvektor ist. Dieser Fall soll im Funktionskörper gesondert behandelt werden. Fügt dazu eine if-else-Verzweigung hinzu: wenn das Argument ein Objekt vom Typ "double" ist, dann sollen die Anweisungen im Funktionskörper wie in Teilaufgabe 2) ausgeführt werden. Wenn das Argument jedoch nicht vom Typ "double" ist, soll eine Nachricht ausgegeben werden, "Argument ist kein gültiger Vektor". Dazu kann anstelle von `return("Irgendeine Nachricht")` die Funktion `stop("Irgendeine Nachricht")` verwendet werden. Diese Funktion wird dazu verwendet, die Ausführung einer Funktion abzubrechen und eine Fehlermeldung auszugeben. Wenn ihr etwas herausgefordert werden wollt, versucht, die Nachricht so zu schreiben, dass beim Funktionsaufruf für "Argument" jeweils das Argument aus dem aktuellen Funktionsaufruf eingesetzt wird. Hinweis: Wenn ihr euch nicht mehr daran erinnert, mit welcher Funktion man überprüfen kann, welchen Typ ein Objekt in R hat, schaut im Kapitel R Basics I nach. 
+
+5.) Ruft eure Funktion `increment_vector` einmal mit einem beliebigen numeric-Vektor als Argument auf und einmal mit einem character-Vektor. Funktioniert alles?
+
+6.) Definiert zuletzt eine weitere Funktion, die zwei Vektoren als Argumente annimmt und diese zu einem neuen Vektor zusammenfügt. Der Rückgabewert soll der neue Vektor sein, der alle Elemente aus den beiden Input-Vektoren enthält. Ruft eure Funktion danach mit geeigneten Argumenten auf, um sie zu testen. 
+
+

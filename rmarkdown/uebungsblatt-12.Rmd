@@ -1,0 +1,90 @@
+---
+title: "Übungsblatt Nr. 12"
+author: "Textanalyse mit R WiSe 24/25 - Lisa Poggel"
+date: "Abgabe bis 28.1.2025, 16:00 Uhr per Mail: l.poggel@fu-berlin.de"
+output: pdf_document
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+**Aufgabe 1: Wiederholung**
+
+Lest euch nochmal das neue Kapitel "Word Embeddings und NER" auf unserer Kurs-Website durch. Formuliert eine Frage zu einem Inhalt, der euch noch nicht ganz klar ist.
+
+\vspace{4mm}
+
+**Aufgabe 2: Verständnis NER und Word Embeddings**
+
+Beantwortet kurz (in einem Satz) die folgenden Fragen: 
+
+* Warum werden die Vektoren in einer Feature Co-Occurrence-Matrix auch "lang und spärlich" genannt? 
+* Was ist der Unterschied zwischen statischen und kontextualisierten Word Embeddings?
+* Was ist das Ziel der Named Entity Recognition? 
+
+\vspace{4mm}
+
+
+**Von den folgenden drei Aufgaben dürft ihr euch je nach Interesse eine (oder auch mehr) zur Bearbeitung auswählen. Aufgabe 3a ist eine reine Verständnisaufgabe, Aufgabe 3b ist eine reine Praxisaufgabe, und Aufgabe 3c ist eine Kombination aus Verständnis- und Praxisaufgabe.**
+
+
+**Aufgabe 3a: Verständnis NER** 
+
+Schaut einen Ausschnitt aus dem folgenden Vortrag von Alan Akbik, einem der Entwickler:innen des Flair-Systems, das wir im Rahmen der Named Entity Recognition kennen gelernt haben.
+
+* Alan Akbik, Das FLAIR Framework zur automatischen Analyse von Texten, https://www.youtube.com/live/LqElF1eZ_ps?si=65KEW0etEfd02RLw&t=1384 (ab Minute 23:08 bis 32:00).
+
+Am Anfang stellt Akbik Named Entity Recognition und Part of Speech Tagging allgemein vor und präsentiert einige Beispiele. Danach erläutert er, wie die sogenannten “Flair Embeddings” zur Erkennung der benannten Entitäten eingesetzt werden (bzw. wurden - mittlerweile wird das etwas anders gemacht). Beantwortet danach kurz die folgenden Fragen:
+
+* Flair Embeddings sind eigentlich "Character Embeddings" und keine Word Embeddings. Was ist der Unterschied?
+* Die Flair Embeddings werden nicht nur auf der Grundlage der Eingabetexte erstellt, sondern sie basieren auch auf "linguistischem Weltwissen", also auf einem sehr großen Korpus aus Texten, die zum Training der Flair-Sprachmodelle verwendet wurden. Schaut euch die folgende Liste der verfügbaren Flair Sprachmodelle an: Woher kommt das "Weltwissen", das in die Erkennung der Named Entities einfließt? https://github.com/flairNLP/flair/blob/master/resources/docs/embeddings/FLAIR_EMBEDDINGS.md
+* Überlegt selbst: Warum gibt es zum Beispiel für Deutsch spezielle Modelle, die auf historischen Zeitschriftentexten trainiert wurden?
+* Im Vortrag erwähnt der Gastgeber Steffen Schilke, dass das Flair Named Entity Recognition System von französischen Gerichten eingesetzt wird, um Eigennamen zum Datenschutz zu schwärzen. Welche Probleme könnten beim Einsatz der Named Entity Recognition in diesem ganz realen Kontext auftreten?
+
+\vspace{8mm}
+
+**Aufgabe 3b: Praxis NER**
+
+Reproduziert den Code aus Abschnitt 10.3 mit Spacyr oder aus Abschnitt 10.4 mit FlaiR für das Märchenkorpus. 
+
+
+**Aufgabe 3c: Wortvektoren vergleichen mit der Kosinusähnlichkeit**
+
+Schaut [dieses Video](https://www.youtube.com/watch?v=-_i9Cg81rXA), das erläutert, wie die Kosinusähnlichkeit für zwei Wörter in einer Feature Co-Occurrence Matrix berechnet werden kann: 
+
+* Dan Jurafsky (2021), Vector 4. Cosine Similarity, https://www.youtube.com/watch?v=-_i9Cg81rXA.
+
+Zu Illustrationszwecken werden in dem Beispiel weder PMI-Werte bestimmt noch eine Singular Value Decomposition wie im Abschnitt 10.1.1 auf der Kurswebsite vorgenommen. Lasst euch davon aber nicht verwirren: Diese Aufgabe soll vor allem zum Verständnis der Kosinusähnlichkeit dienen. Die zusätzlichen Verarbeitungsschritte, die notwendig sind, um aus den "rohen" Frequenzen Word Embeddings zu machen, werden deswegen hier ausgespart. Bearbeitet im Anschluss die folgende Aufgabe aus [Melanie Andresens Lehrbuch "Computerlinguistische Methoden für die Digital Humanities" (2024, S. 108)](https://fu-berlin.primo.exlibrisgroup.com/permalink/49KOBV_FUB/1v1tp5h/alma9961249607702883). Zur Berechnung der Kosinusähnlichkeit könnt ihr euch nach dem Beispiel aus dem Video richten (ca. Minute 2:25 bis 3:14). 
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.95\textwidth]{andresen_kosinusaehnlichkeit.png}
+\end{figure}
+
+
+Hinweis: Ihr dürft zur Berechnung einen Taschenrechner nutzen, oder, wenn ihr keinen Taschenrechner habt, R als Taschenrechner verwenden. Die Wurzel lässt sich in R mit der Funktion sqrt() ziehen. Für das Beispiel im Video wäre der R Code beispielsweise:
+
+```{r eval=FALSE}
+
+(442*5+8*3982+2*3325) / (sqrt(442^2+8^2+2^2)*sqrt(5^2+3982^2+3325^2))
+
+```
+
+\vspace{4mm}
+
+Überprüft anschließend die berechneten Werte in R, indem ihr ein kleines Skript schreibt: 
+
+
+1. Kopiert zunächst die Definition der Funktion cos_sim() aus dem [Abschnitt 10.1.1](https://lipogg.github.io/textanalyse-mit-r/word-embeddings-und-ner.html#count-based-word-embeddings-mit-quanteda-und-pmi-werten) auf der Kurswebsite in euer Skript und führt den Code aus. 
+
+2. Erstellt dann eine Matrix, welche die Kookkurrenzen aus der Abbildung repräsentiert. Die Wörter sollten den Zeilen- bzw. Spaltennamen entsprechen, und die Werte sind die Elemente der Matrix. 
+
+>Hinweis: Bisher haben wir Feature Cooccurrence Matrizen wie diese immer mithilfe von Quanteda (und im Abschnitt POS Tagging und Dependency Parsing mit UDPipe) aus einem Korpus erstellt. Diese Pakete braucht ihr aber für das kleine Beispiel nicht, zur Bearbeitung der Aufgabe reichen die R Base Funktionen aus dem [Abschnitt 2.5](https://lipogg.github.io/textanalyse-mit-r/r-basics-ii-datenstrukturen.html#matrizen) und die Funktion cos_sim() aus dem [Abschnitt 10.1.1](https://lipogg.github.io/textanalyse-mit-r/word-embeddings-und-ner.html#count-based-word-embeddings-mit-quanteda-und-pmi-werten) auf der Kurswebsite. 
+
+3. Berechnet zuletzt die Kosinusähnlichkeit der Wortvektoren für die Wörter "kochen" und "backen". Berechnet außerdem die Kosinusähnlichkeit der Wortvektoren für die Wörter "Zucker" und "Mehl". 
+
+>Hinweis: Dazu müsst ihr zunächst die Wortvektoren für die beiden Wörter aus der Matrix herausgreifen. Das geht ganz einfach mit einer geeigneten Zugriffsoperation. Wenn ihr euch nicht mehr erinnert, wie man auf die Zeilen (bzw. Spalten) einer Matrix zugreifen kann, schaut in den [Abschnitt 2.5](https://lipogg.github.io/textanalyse-mit-r/r-basics-ii-datenstrukturen.html#matrizen) auf der Kurswebsite. Wenn ihr die beiden Vektoren erstellt habt, könnt ihr sie anschließend der Funktion cos_sim() übergeben. Die Funktion cos_sim() berechnet die Kosinusähnlichkeit zweier Vektoren.  
+

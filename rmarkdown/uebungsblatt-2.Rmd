@@ -1,0 +1,83 @@
+---
+title: "Übungsblatt Nr. 2"
+author: "Textanalyse mit R WiSe 24/25 - Lisa Poggel"
+date: "Abgabe bis 04.10.2024, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Aufgabe 1: Wiederholung**
+
+Lest euch nochmal die Inhalte zur Sitzung am Dienstag im neuen Kapitel "R Basics II" auf unserer [Kurs-Website](https://lipogg.github.io/textanalyse-mit-r) durch. Formuliert eine Frage zu einem Inhalt, der euch noch nicht ganz klar ist und bringt eure Frage(n) nächste Woche mit. 
+
+\vspace{1mm}
+
+**Aufgabe 2: Begriffsklärung**
+
+Erläutert kurz in euren eigenen Worten die folgenden Begriffe: Datenstruktur, Element, Index, Zugreifen
+
+\vspace{1mm}
+
+**Aufgabe 3: Verständnis**
+
+1.) Welche Datenstrukturen werden durch die Bilder a), b), c) und d) repräsentiert? 
+
+![](uebung02-sose24.png)
+
+2.) Welche Indexpositionen und ggf. welchen Namen haben die folgenden Elemente? 
+
+- `TRUE` in Datenstruktur a)
+- `8.6` in Datenstruktur b)
+- `"blau"` in Datenstruktur c)
+- `"Nike"` in Datenstruktur d)
+
+3.) Angenommen, Datenstruktur b) heißt `hauptstaedte`. Was wird auf dem Bildschirm ausgegeben, wenn der Ausdruck `hauptstaedte + 2` ausgewertet wird? 
+
+i) eine Fehlermeldung ii) eine einzelne Zahl iii) ein Objekt mit der Datenstruktur b) 
+
+4.) Beschreibt in euren eigenen Worten, was in jeder Zeile passiert. Zum Verständnis dürft ihr den Code im RStudio ausführen. 
+
+```{r results = FALSE}
+genres <- c("Jazz", "Klassik", "Rap", "Punk", "Techno", "Rock")
+genres[3]
+musiksammlung <- list(Genres=genres, 
+                      Musiker_innen=c("Miles Davis", "Mozart", "Missy Elliott", 
+                                      "Bikini Kill", "Juan Atkins", "Cem Karaca"))
+musiksammlung[[1]][3]
+```
+
+
+\vspace{5mm}
+
+**Aufgabe 4: Praxis** 
+
+Hinweis: Den Code zu diesen Aufgaben findet ihr in den Abschnitten 2.2 und 2.3 auf der Kurswebsite.
+
+1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nummer des Übungsblatts und eurem Namen. 
+
+2.) Denkt euch einen passenden Namen für eine Variable aus, die als Platzhalter für einen Vektor dienen soll, der die Titel von euren drei Lieblingsfilmen enthält. Erstellt den Vektor mithilfe der Funktion `c()`.  
+
+3.) Überprüft, ob das erste Element des Vektors dem Wert "Star Wars" entspricht.  
+
+>Hinweis: Dabei müssen zwei verschiedene Operationen durchgeführt werden: Zum einen muss auf das Element zugegriffen werden (R Basics II Abschnitt 2.2.4 "Zugriffsoperationen auf Vektoren"). Zum anderen muss das Element  mithilfe eines geeigneten Operators mit dem Wert "Star Wars" verglichen werden (R Basics I). 
+
+4.) Fügt am Ende des Vektors noch einen vierten Film hinzu und weist den Vektor einer neuen Variable zu. Nennt die Variable `alle_lieblingsfilme`.
+
+5.) Greift auf das erste und dritte Element des neuen Vektors `alle_lieblingsfilme` zu und lasst euch die Werte auf dem Bildschirm ausgeben. 
+
+6.) Greift auf die ersten drei Elemente des Vektors `alle_lieblingsfilme` zu und weist die Werte einer neuen Variable mit dem Namen `top_3` zu. 
+
+**Freiwillige Zusatzaufgaben:** 
+
+7.) Erstellt zuletzt eine Liste. Die Liste soll zwei Elemente haben: "Lieblingsfilme" und "Jahr". Das Element mit dem Namen "Lieblingsfilme" soll der Vektor `alle_lieblingsfilme` sein. Das Element "Jahr" soll ein Vektor sein, der für jeden Film im Vektor `alle_lieblingsfilme` das Erscheinungsjahr enthält. 
+
+8.) Wiederholt die Teilaufgaben 3), 5) und 6) mit der Liste aus Teilaufgabe 7). Wie müsst ihr die Zugriffsoperationen anpassen, damit ihr auf die Filmtitel in der Liste zugreifen könnt? 
+
+9.) In Teilaufgabe 2) habt ihr überprüft, ob das erste Element des Vektors dem Wert "Star Wars" entspricht. Mit welchem Operator könnte man überprüfen, ob der Wert "Star Wars" irgendwo in dem Vektor enthalten ist?
+
+\vspace{80mm}
+
+

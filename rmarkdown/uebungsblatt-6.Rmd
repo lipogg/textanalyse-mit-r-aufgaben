@@ -1,0 +1,156 @@
+---
+title: "Übungsblatt Nr. 6: Wiederholung"
+author: "Textanalyse mit R WiSe 24/25 - Lisa Poggel"
+date: "Bearbeitung und Abgabe freiwillig"
+output: pdf_document
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+**Wichtig**: Bearbeitet die folgenden Aufgaben eigenverantwortlich nach eurem individuellen Wiederholungsbedarf. Falls ihr die Praxisaufgaben weniger hilfreich findet, dann bearbeitet nur die theoretischen Aufgaben. Besonders empfehle ich euch die Aufgaben 1, 3, 4 und 5. Diese Aufgaben addressieren Schwierigkeiten und Fehler, die mir in euren Lösungen häufig aufgefallen sind. Ihr solltet euch deswegen nochmal meine Korrekturen zu euren Lösungen ansehen, bevor ihr die Aufgaben beantwortet. Wer häufiger Anmerkungen zur Syntax findet, dem lege ich Aufgabe 2 besonders ans Herz.
+
+**Aufgabe 1: Wiederholung Variablen und Operatoren **
+
+1.) Welcher Variablenname ist vorzuziehen? Warum?
+
+a) `zahl <- 9` oder `neun <- 9` 
+b) `Fahrrad <- "Gravel Bike"` oder `fahrrad <- "Gravel Bike"` 
+c) `for (woerter in woerter_vektor) {}` oder `for (wort in woerter_vektor) {}`
+d) `zahlen_addieren <- function(zahl_1, zahl_2) {}` oder `addierte_zahlen <- function(zahl_1, zahl_2) {}`
+
+3.) Welcher Operator ist vorzuziehen? Warum? 
+
+a) `if (8 %in% zahlen[2]) {}` oder `if (8 == zahlen[2]) {}`
+b) `zahlen != 8 & zahlen != 9` oder `zahlen != 8 && zahlen != 9`
+
+`zahlen` ist jeweils ein Vektor `c(2, 3, 5, 1)`.
+
+**Aufgabe 2: Wiederholung Syntax**
+
+Wir haben in den letzten Stunden viele neue Syntaxregeln kennengelernt und dabei in ganz verschiedenen Kontexten eckige und runde Klammern, geschweifte Klammern oder den `$`-Operator verwendet. Das ist am Anfang sehr verwirrend. Diese Teilaufgabe soll euch dabei helfen, Sicherheit in den Syntaxregeln zu  gewinnen, insbesondere bei der Verwendung von Klammern und dem `$`-Operator. 
+
+Legt zunächst auf einem Blatt Papier (oder in einer Textdatei) eine Tabelle mit je zwei Spalten an. Geht dann nach und nach die vier Kapitel R Basics I-IV durch und sucht alle Anwendungsfälle für die verschiedenen Arten von Klammern und den `$`-Operator heraus. Tragt in die linke Spalte je ein Anwendungsbeispiel für Klammern oder den `$`-Operator ein und tragt in die linke Spalte Stichpunkte zur Erläuterung ein. Achtet darauf, in welchen Fällen um die Klammern Leerzeichen stehen müssen und in welchen nicht. Die Tabelle sieht dann zum Beispiel so aus: 
+
+  | Beispiel |  Bedeutung        |
+  |---------|-------------------|
+  | print() |  Funktionsaufruf  |
+  | df[,3] | Zugriff auf die dritte Spalte eines Dataframes | 
+  | df\$preis |  Zugriff auf die Spalte `preis` eines Dataframes    |
+  | liste[["preis"]] | Zugriff auf das Element mit dem Namen `preis` in einer Liste - Option 1 |
+  | liste\$preis | Zugriff auf das Element mit dem Namen `preis` in einer Liste - Option 2 | 
+  | ... | ... |
+
+
+**Aufgabe 3: Wiederholung Datenstrukturen**
+
+1) Angenommen, wir haben ein Objekt `snacks`. Wie kann man auf das erste Element zugreifen...
+
+a) ...wenn `snacks` ein einfacher Vektor ist? 
+b) ...wenn `snacks` ein benannter Vektor ist? 
+c) ...wenn `snacks` eine Liste ist?
+
+2) Angenommen, wir haben ein Objekt `snack_preise`. Wie kann man auf das Element mit dem Namen `Chips` zugreifen...
+
+a) ...wenn `snack_preise` ein benannter Vektor ist? 
+b) ...wenn `snack_preise` eine Liste ist? 
+
+Wenn ihr Probleme mit der Unterscheidung des einfachen und des doppelten Zugriffsoperators [[]] habt, lest euch diesen Abschnitt durch: https://adv-r.hadley.nz/subsetting.html#subset-single.
+
+3) **Praxis:** 
+i) Erstellt eine Matrix mit dem Namen `messwerte_matrix` mit 2 Zeilen und 3 Spalten, die Temperaturdaten (in Grad Celsius) für zwei Tage an drei verschiedenen Standorten enthält. Verwendet  beliebige Temperaturwerte. Weist der Matrix passende Zeilen- und Spaltennamen zu, z.B. "Montag", "Dienstag" für die Zeilen und "Berlin", "Bremen", "Hamburg" für die Spalten.
+ii) Wandelt anschließend die Matrix in einen Dataframe um. Verwendet dazu die Funktion `as.data.frame()`. Fügt dem Dataframe eine neue Spalte "Durchschnitt" hinzu, welche die Durchschnittstemperatur für jeden Tag angibt. Den Durchschnitt könnt ihr mithilfe der Funktion `rowMeans()` berechnen. Die Funktion berechnet den Durchschnitt für jede Zeile eines Dataframes und gibt einen Vektor zurück. Beim Funktionsaufruf müsst ihr der Funktion den Dataframe als Argument übergeben. 
+iii) Führt zuletzt folgende Zugriffsoperationen aus: Zugriff auf das Element in der zweiten Zeile und der dritten Spalte der Matrix/des Dataframes; Zugriff auf die dritte Spalte der Matrix/des Dataframes; Zugriff auf die Spalte des Dataframes mit dem Namen `Durchschnitt`; Zugriff auf alle Messdaten für den ersten Standort, für die in der Spalte `Durchschnitt` ein Wert größer 20 eingetragen ist.
+
+**Aufgabe 4: Wiederholung Kontrollstrukturen**
+
+1) Angenommen, wir wollen eine for-Schleife erstellen, die einen Vektor `vec` durchläuft. In jedem Schleifendurchlauf soll ein Element des Vektors verändert werden. Welche for-Schleife ist vorzuziehen? Warum? 
+
+a) `for (i in seq_along(vec)) {}`
+b) `for (elem in vec) {}`
+
+2) Angenommen, wir wollen eine for-Schleife erstellen, die einen Vektor `vec` durchläuft. In jedem Schleifendurchlauf soll der Wert des aktuellen Elements mit einem gegebenen Wert x verglichen werden. Wenn der Wert des Elements gleich x ist, dann soll eine Meldung ausgegeben werden. Welche for-Schleife ist vorzuziehen? Warum? 
+
+a) `for (i in seq_along(vec)) {}`
+b) `for (elem in vec) {}`
+
+3) Wie muss der Schleifenkörper der folgenden while-Schleife verändert werden, damit die Schleife nicht unendlich läuft? 
+
+```{r eval=FALSE}
+
+n <- 24
+
+while (n > 10) {
+  print("Noch mehr als 10 Tage bis Weihnachten :-(")
+}
+
+```
+
+4) Wie kann man die folgenden Probleme OHNE Verwendung einer Schleife lösen? Es soll dabei jeweils  Vektorisierung zum Einsatz kommen. Gebt jeweils ein Codebeispiel an.  
+
+a) Alle Elemente in einem numeric-Vektor sollen mit einer Zahl addiert werden. 
+
+b) Ihr wollt herausfinden, wie häufig jedes Wort in einem Roman vorkommt.  
+
+c) Die Elemente aus zwei verschiedenen character-Vektoren sollen paarweise in einem neuen Vektor zusammengefügt werden. Also wenn die Vektoren `c("Hallo", "Hi")` und `c("Max", "Moritz")` sind, soll ein neuer Vektor `c("Hallo Max", "Hi Moritz")` herauskommen. 
+
+5) **Praxis**: In Teilaufgaben 4.1 und 4.2 haben wir theoretische Situationen angenommen, in denen verschiedene for-Schleifen sinnvoll sind. Schreibt zu jeder der beiden Teilaufgaben eine Beispielschleife. 
+
+\vspace{2mm}
+
+**Aufgabe 5: Wiederholung Funktionen** 
+
+1) Was sind Parameter und Rückgabewert der folgenden Funktion? 
+
+```{r eval=FALSE}
+berechne_flaeche <- function(    ) {
+  flaeche <- laenge * breite
+  return(    )
+}
+
+```
+
+2) Ist die folgende Funktion vektorisiert?
+
+```{r eval=FALSE}
+celsius_zu_fahrenheit <- function(temperatur_celsius) {
+  temperatur_fahrenheit <- temperatur_celsius * 9 / 5 + 32
+  return(temperatur_fahrenheit)
+}
+
+```
+
+3) Angenommen, wir haben einen Dataframe `df` und wir wollen eine neue Spalte `neue_spalte` hinzufügen. In der Spalte soll ein Wert `x` stehen, wenn in einer anderen Spalte `s` der Wert `w` steht, und sonst `y`. Das kann mit einer Anweisung der Form `df$neue_spalte <- ifelse()` erreicht werden. Welche Argumente müssen der Funktion `ifelse()` übergeben werden, um das Problem zu lösen?
+
+4) **Praxis:** Der folgende Code berechnet für drei verschiedene Sparguthaben den Endbetrag nach einer festgelegten Anzahl von Jahren und einem festen Zinssatz. Schreibt den Code als Funktion um und ruft anschließend die Funktion mit geeigneten Argumenten auf.
+
+```{r eval=FALSE}
+sparguthaben <- c(1000, 1500, 2000) # Anfangsguthaben
+zinssatz <- 0.05 # 5% Zinssatz
+jahre <- 3 # Anzahl der Jahre
+
+endbetraege <- c()
+for (i in seq_along(sparguthaben)) {
+  endbetraege[i] <- sparguthaben[i] * (1 + zinssatz) ^ jahre
+}
+print(endbetraege)
+```
+
+\vspace{2mm}
+
+**Abfrage zum Wiederholungsbedarf**
+
+Bitte antwortet ehrlich auf die folgenden Fragen. Das hilft mir, mein Seminar für das kommende Semester zu verbessern.
+
+1) Haben die Aufgaben auf diesem Übungsblatt geholfen, den Stoff aus den letzten Stunden zu verstehen?
+
+2) Welches Thema oder welche Themen sind euch ggf. immer noch unklar? 
+
+3) Welche Arten von Übungsaufgaben aus den letzten Übungszetteln fandet ihr besonders hilfreich? Welche Art von Aufgaben fandet ihr eher nicht so hilfreich? Mit "Arten von Übungsaufgaben" meine ich z.B. Praxisaufgaben, Begriffe in eigenen Worten erläutern, Code erklären, Multiple Choice Aufgaben. 
+
+
+
+
+

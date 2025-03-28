@@ -1,0 +1,107 @@
+---
+title: "Übungsblatt Nr. 14"
+author: "Textanalyse mit R WiSe 24/25 - Lisa Poggel"
+date: "Abgabe bis 10.2.2025, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
+output: pdf_document
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+**Aufgabe 1: Wiederholung**
+
+Lest euch nochmal das neue Kapitel "Arbeit mit XML-TEI Dokumenten" auf unserer Kurs-Website durch. Formuliert eine Frage zu einem Inhalt, der euch noch nicht ganz klar ist. 
+
+Ihr könnt auch Fragen formulieren, die sich auf irgendeinen anderen Inhalt aus dem Seminar oder zu meinen Korrekturen (bekommt ihr bis Sonntag) beziehen. Diese Fragen können wir in der letzten Stunde hoffentlich noch klären. 
+
+\vspace{4mm}
+
+**Aufgabe 2: Verständnis XML-TEI**
+
+Bennent die Bestandteile des folgenden XML-TEI Dokuments. Wie viele verschiedene XML-TEI-Elemente gibt es? Gibt es Attribute, und wenn ja, welche? Wie viele Kindelemente hat das Element TEI? Gebt als Kindelemente nur die Elemente an, die sich direkt eine Ebene unterhalb des TEI-Elements befinden. Elemente, die auf tieferen Ebenen liegen (also Kindelemente von Kindelementen) sollten nicht berücksichtigt werden.
+
+```
+<TEI version="3.3.0" xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+    <fileDesc>
+     <titleStmt>
+      <title>To make a prairie</title>
+      <author>Emily Dickinson</author>
+     </titleStmt>
+    </fileDesc>
+  </teiHeader>
+  <text>
+   <front>
+    <head>1755</head>
+   </front>
+   <body>
+    <l>To make a prairie it takes a clover and one bee,</l>
+    <l>One clover, and a bee,</l>
+    <l>And revery.</l>
+    <l>The revery alone will do,</l>
+    <l>If bees are few.</l>
+   </body>
+  </text>
+</TEI>
+
+```
+
+\vspace{30mm}
+
+**Aufgabe 3: Praxis** 
+
+**Achtung: Vor der Bearbeitung dieser Aufgaben müsst ihr die Datei "ger000008-schiller-die-raeuber.tei.xml" (s. Blackboard) abspeichern. Die Datei findet ihr auch unter https://dracor.org/ger/schiller-die-raeuber#downloads. Zur Bearbeitung dieser Aufgabe müsst ihr nur den Code im [Abschnitt 13.1 "Beispiel Dramenanalyse"](https://lipogg.github.io/textanalyse-mit-r/arbeit-mit-xml-tei-dokumenten.html#beispiel-dramenanalyse) auf der Kurswebsite anpassen.**
+
+1) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nr. des Übungsblatts und euren Namen.
+
+2) Setzt euer Arbeitsverzeichnis auf den Ordner, in dem sich die Datei "ger000008-schiller-die-raeuber.tei.xml" befindet.
+
+3) Installiert und ladet das Paket xml2. Ladet die Pakete ggplot2, quanteda und quanteda.textplots. 
+
+4) Lest die Datei "ger000008-schiller-die-raeuber.tei.xml" ein.
+
+5) Entfernt den Namespace. 
+
+6) Extrahiert alle Elemente, die Bühnenanweisungen repräsentieren. 
+
+>Hinweis: Hier müsst ihr den Code von der Kurswebsite anpassen. Findet zunächst heraus, wie die Elemente mit den Bühnenanweisungen heißen, indem ihr das XML-TEI-Dokument zum Beispiel im RStudio öffnet. Passt anschließend den XPath-Ausdruck so an, dass anstelle der sp-Elemente die Elemente mit den Bühnenanweisungen gefunden werden. 
+
+7) Anschließend sollt ihr den Textinhalt der in Teilaufgabe 6 extrahierten Elemente auslesen und als Zeichenkette speichern. Achtung: Hier ist ein einzelne Zeichenkette gemeint und kein Character-Vektor. 
+
+>Hinweis: Im Beispiel auf der Kurswebsite haben wir eine for-Schleife verwendet, um nacheinander alle Sprechtexte der verschiedenen Figuren in einen Dataframe einzufügen. Dabei musste zwischen den Sprechtexten der verschiedenen Figuren unterschieden werden. Mit tapply() haben wir dann später die chronologisch nach dem Auftreten der Figuren geordneten Einträge des Dataframes zu einem benannten Vektor zusammengefasst, der für jede Figur den gesamten Sprechtext vereint. Beim Extrahieren der Bühnenanweisungen muss aber nicht zwischen einzelnen Figuren oder Szenen unterschieden werden. Ihr könnt euch also den Mechanismus der Vektorisierung zunutze machen und die Funktionen paste() und xml_text() direkt auf den Vektor mit den extrahierten Elementen anwenden. Das kann in einer oder maximal zwei Zeilen Code erfolgen. Wenn ihr für diesen Schritt deutlich mehr Code schreibt, macht ihr etwas falsch. 
+
+8) Wandelt die Zeichenkette mit den Bühnenanweisungen aus Teilaufgabe 7 in ein Quanteda Corpus-Objekt um. 
+
+9) Tokenisiert anschließend das Corpus-Objekt. Enfernt dabei Satzzeichen und Sonderzeichen, allerdings keine Stoppwörter. 
+
+10) Wandelt das Quanteda Tokens-Objekt aus Teilaufgabe 9 in eine Document Feature Matrix (DFM) um. 
+
+11) Erstellt eine Wortwolke für alle Wörter, die mindestens 4 mal vorkommen. Welche Wörter kommen am häufigsten in den Bühnenanweisungen von "Die Räuber" vor? 
+
+12) Passt das Preprocessing an, um die Wortwolke etwas interessanter zu machen. Welche konkreten Preprocessingschritte ihr anwendet, könnt ihr selbst entscheiden: Ihr könnt zum Beispiel Stoppwörter entfernen oder die Bühnenanweisungen lemmatisieren und Part of Speech Tags bestimmen, um zum Beispiel nur die Verben in den Bühnenanweisungen zu visualisieren. 
+
+13) Welche Fragestellungen könnte man mithilfe von Bühnenanweisungen in Dramen untersuchen? Zur Inspiration: Mein Kollege Jonah Lubin hat beispielsweise kürzlich auf der Jahreskonferenz des Verbands *Digital Humanities im deutschsprachigen Raum (DHd)* einen Workflow vorgestellt, mit dem er Erwähnungen von Requisiten in Bühnenanweisungen identifiziert und analysiert hat: https://zenodo.org/records/10698448. 
+
+\vspace{4mm}
+
+**Freiwillige Zusatzaufgabe: Forschungsarbeit und Code verstehen**
+
+Lest den folgenden Beitrag aus dem Journal of Computational Literary Studies: 
+
+* Botond Szemes und Mihály Nagy (2024). *Repetition and Innovation in Dramatic Texts. An Attempt to Measure the Degree of Novelty in Character's Speech*, https://jcls.io/article/id/3923/. 
+
+Die Autor:innen verwenden in XML-TEI ausgezeichnete Shakespeare-Dramen aus dem euch bereits bekannten Projekt DraCor und vergleichen die Sprechtexte verschiedener Charaktere anhand von Sentence Embeddings, also Embeddingvektoren, die für gesamte Sätze statt für einzelne Wörter bestimmt werden. Anschließend berechnen sie die Kosinusähnlichkeiten der Embeddings für die Sprechtexte der Charaktere und visualisieren anhand der berechneten Kosinusähnlichkeiten, welche Charaktere sich sprachlich ähneln, das heißt welche Charaktere mit größerer Wahrscheinlichkeit andere Charaktere wiederholen. 
+
+Schaut euch anschließend das Repositorium mit dem Code zu dem Forschungsbeitrag auf GitHub an (https://github.com/SzemesBotond/info-drama) und beantwortet kurz folgende Fragen: 
+
+- Was machen die beiden Skripte `max-sim-from-embedding.R` und `networfk-from-embedding.R`?
+- Wofür wird die Datei `shakespeare.ipynb` verwendet? Es handelt sich dabei um ein sogeanntes Jupyter Notebook, ein spezielles Dateiformat, um Python Code zusammen mit Erläuterungen und dem Output des Codes mit anderen zu teilen. 
+
+Orientiert euch dabei nicht an den Details und lasst euch nicht entmutigen, wenn ihr die verwendeten Pakete nicht kennt und den Code nicht Zeile für Zeile versteht. Die Aufgabe zielt darauf ab, dass ihr anhand von Variablen-, Paket- und Dateinamen, den Erläuterungen in der README-Datei und einem groben Verständnis des Codes übt, den Zweck von fremdem Code zu verstehen. Ihr werdet sehen: Nach diesem Semester seid ihr bereits in der Lage, nicht nur die in der Forschungsarbeit verwendeten Methoden, sondern auch den zugrundelegenden Code in den Grundzügen zu verstehen! 
+
+
+
+

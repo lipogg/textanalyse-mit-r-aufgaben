@@ -1,0 +1,85 @@
+---
+title: "Übungsblatt Nr. 8"
+author: "Textanalyse mit R WiSe 2024/25 - Lisa Poggel"
+date: "Abgabe bis 10.12.2024, 12:00 Uhr per Mail: l.poggel@fu-berlin.de"
+output: pdf_document
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+**Aufgabe 1: Wiederholung**
+
+In dieser Woche sollt ihr euch mit den zwei neuen Kapiteln "Exkurs: Reguläre Ausdrücke" und "Textanalyse II"  vertraut machen. 
+
+* Die Kapitel  "Textanalyse I", "Textanalyse II" und "Exkurs: Reguläre Ausdrücke" sind als Referenz gedacht. In diesen Kapiteln könnt ihr immer nachschlagen, wenn ihr Code zum Erstellen von readtext- und quanteda-Objekten oder zum Preprocessing sucht. 
+* Im Kapitel "Textanalyse III", das in der nächsten Woche hinzukommt, wird der Code aus diesen drei Kapiteln immer wieder verwendet. Neu hinzu kommt nur der Code für Analyse und Visualisierung, und hin und wieder mal ein paar zusätzliche Verarbeitungsschritte.
+
+Wenn ihr in der vergangenen Woche den Text zur Textanalyse von Jünger und Gärtner gelesen habt, sollte es euch etwas leichter fallen, den Überblick zu bewahren. Solltet ihr den Text noch nicht gelesen haben, lest ihn diese Woche. **Wenn es euch zu viel wird, überspringt erst einmal das Kapitel "Exkurs: Reguläre Ausdrücke" sowie die Aufgabe 2.2.**
+
+**Aufgabe 2: Verständnis**
+
+1.) Beantwortet kurz die folgenden Fragen mithilfe der zwei neuen Kapitel. Ein Satz reicht als Antwort. 
+
+* Was ist der Unterschied zwischen Stemming und Lemmatisierung?
+* Was sind reguläre Ausdrücke? 
+* Was macht die R-base-Funktion `gsub()`? 
+* Was sind im readtext- und quanteda-Kontext "docvars"?
+* Worauf ist bei der Entfernung von Stoppwörtern zu achten? 
+
+2.) Angenommen, ihr möchtet ein Korpus deutschsprachiger Zeitungsartikel analysieren. Eure Forschungsfrage lautet: "Mit welchen Adjektiven wird der Anschlag auf das World Trade Center am 11. September 2001 in verschiedenen Zeitungsartikeln beschrieben?". Ihr möchtet dazu zunächst die Texte nach allen Erwähnungen des Ereignisses durchsuchen und danach mithilfe von POS-Tagging und Dependency Parsing (das lernt ihr etwas später kennen) alle Adjektive suchen, die sich auf das Ereignis beziehen. Sollten beim Preprocessing Satzzeichen, Sonderzeichen und Zahlen entfernt werden? Geht davon aus, dass diese für POS-Tagging und Dependency Parsing nicht notwendig sind. 
+
+3.) (fakultativ) Angenommen, wir durchsuchen mithilfe der folgenden regulären Ausdrücke den Text "Am 1.1.2024 ist die Sonne um 5 Uhr morgens aufgegangen. Um 6:00 war es nebelig und um 12 Uhr hat es geregnet." Welche Zahlen werden jeweils gefunden? 
+
+* `[0-9]`
+* `[0-9]{2}`
+* `[0-9]{2}\s`
+* `\s[0-9]{2}\s`
+* `[12]`
+* `12`
+
+
+**Aufgabe 3: Praxis**
+
+1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nr. des Übungsblatts und euren Namen.
+
+2.) Setzt euer Arbeitsverzeichnis auf den Ordner, in dem sich der Ordner mit dem Namen "korpus" aus der letzten Stunde befindet.  
+
+>Hinweis: Wie das geht könnt ihr im Abschnitt [5.5 "Textdateien einlesen"](https://lipogg.github.io/textanalyse-mit-r/textanalyse-i-korpus-tokens-daten-und-dateien.html#textdateien-einlesen) nachlesen. Im Kapitel ["Orientierung im RStudio"](https://lipogg.github.io/textanalyse-mit-r/orientierung-im-rstudio.html) findet ihr außerdem einen Screenshot, der erläutert, wie ihr das Arbeitsverzeichnis über die RStudio-Nutzeroberfläche setzen könnt.
+
+3.) Ladet die Pakete readtext und quanteda. 
+
+4.) Lest alle Texte aus dem Ordner mit dem Namen "korpus" ein und extrahiert dabei die Metadaten aus den Dateinamen. 
+
+> Hinweis: Den Code dazu findet ihr im Abschnitt [5.5](https://lipogg.github.io/textanalyse-mit-r/textanalyse-i-korpus-tokens-daten-und-dateien.html#textdateien-einlesen). 
+
+5.) Findet mithilfe einer geeigneten Zugriffsoperation heraus, wie viele verschiedene Publikationsjahre es unter den eingelesenen Texten gibt. 
+
+> Hinweis: Erinnert euch an den Abschnitt [2.2.5 "Operationen auf Vektoren"](https://lipogg.github.io/textanalyse-mit-r/r-basics-ii-datenstrukturen.html#operationen-auf-vektoren). In diesem Abschnitt wurden zwei verschiedene Möglichkeiten vorgestellt, wie die Anzahl der einzigartigen Werte in einem Vektor bestimmt werden kann. Welche waren das? 
+
+6.) Erstellt aus den eingelesenen Texten ein Quanteda corpus-Objekt mit einem geeigneten Namen.
+
+7.) Erstellt mithilfe der Funktion `corpus_subset()` ein Teilkorpus, das nur die Märchen von Arthur Schnitzler enthält. 
+
+>Hinweis: Den Code dazu findet ihr im Abschnitt [5.7 "Quanteda corpus-Objekte"](https://lipogg.github.io/textanalyse-mit-r/textanalyse-i-korpus-tokens-daten-und-dateien.html#quanteda-corpus-objekte). 
+
+8.) Lasst euch mithilfe der Funktion `summary()` Informationen zum Schnitzler-Teilkorpus ausgeben. Findet mithilfe einer geeigneten Zugriffsoperation anschließend heraus, wie viele Texte mehr als 40000 Tokens haben. Findet zuletzt mithilfe einer geeigneten Zugriffsoperation heraus, welche Texte 1905 geschrieben wurden. 
+
+>Hinweis: Ein Beispiel zur Verwendung der `summary()`-Funktion findet ihr im Abschnitt [5.7 "Quanteda corpus-Objekte"](https://lipogg.github.io/textanalyse-mit-r/textanalyse-i-korpus-tokens-daten-und-dateien.html#quanteda-corpus-objekte). Wenn die `summary()`-Funktion auf ein Quanteda corpus-Objekt angewendet wird, gibt sie einen Dataframe zurück. Zur Lösung dieser Aufgabe können also alle Zugriffsoperationen angewendet werden, die wir im Zusammenhang mit Dataframes kennengelernt haben. Erinnert euch also an die Zugriffsoperationen im Abschnitt [2.7.2 "Operationen auf Dataframes"](https://lipogg.github.io/textanalyse-mit-r/r-basics-ii-datenstrukturen.html#operationen-auf-dataframes).
+
+9.) Tokenisiert jetzt die Texte. Entfernt dabei KEINE Satzzeichen und Zahlen. 
+
+>Hinweis: Tokenisieren ist einfach ein anderer Begriff für "in Tokens zerlegen" oder "ein tokens-Objekt erstellen". Das Tokenisieren ist eine aufwändige Operation, für die der Computer einige Zeit benötigt. Wartet einfach ab, bis auf der Konsole wieder `>` angezeigt wird. 
+
+10.) Lemmatisiert die Texte und betrachtet anschließend den UDPipe-Dataframe. Wie gut hat das Lemmatisieren funktioniert? Welche Wörter wurden nicht richtig erkannt? Gibt es NA-Werte? Gibt es Zeilen, in denen mehrere Lemmata stehen? 
+
+>Hinweis: Den Code dazu findet ihr im Abschnitt  [7.7.2](https://lipogg.github.io/textanalyse-mit-r/textanalyse-ii-preprocessing.html#methode-2-lemmatisierung-mit-udpipe).
+
+11.) Speichert den UDPipe-Dataframe mithilfe der Funktion `saveRDS()` in einer RDS-Datei. 
+
+>Hinweis: Den Code dazu findet ihr ebenfalls im Abschnitt [7.7.2](https://lipogg.github.io/textanalyse-mit-r/textanalyse-ii-preprocessing.html#methode-2-lemmatisierung-mit-udpipe).
+
+

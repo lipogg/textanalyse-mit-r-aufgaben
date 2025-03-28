@@ -1,0 +1,66 @@
+---
+title: "Übungsblatt Nr. 13"
+author: "Textanalyse mit R WiSe 24/25 - Lisa Poggel"
+date: "Abgabe bis 3.2.2025, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
+output: pdf_document
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+**Aufgabe 1: Wiederholung**
+
+Lest euch nochmal das neue Kapitel "Exkurs: Web Scraping und APIs" auf unserer Kurs-Website durch. Formuliert eine Frage zu einem Inhalt, der euch noch nicht ganz klar ist.
+
+\vspace{4mm}
+
+**Aufgabe 2: XPath und Vorblick**
+
+Schreibt XPath-Ausdrücke zur Suche nach folgenden HTML-Elementen: 
+
+* Ein div-Element irgendwo im HTML-Baum
+* Ein a-Element mit einem div-Element als Elternelement. Das div-Element ist irgendwo im HTML-Baum
+* Ein img-Element mit dem Attribut "src='https://example.com'", irgendwo im HTML-Baum
+* Ein button-Element mit dem Text "Hier klicken", irgendwo im HTML-Baum
+
+Zur Bearbeitung dieser Aufgabe könnt ihr zum Beispiel die folgenden Ressourcen nutzen:
+
+* Neues Kapitel "Exkurs: XML, TEI und XPath" auf der Kurswebsite. Das Kapitel erläutert die Verwendung von XPath zur Suche in XML-TEI-Dokumenten, aber da HTML und XML aus der selben Sprache hervorgegangen sind, sind die XML-Beispiele direkt auf HTML übertragbar.
+* Tutorial in Videoform mit Beispielen: [https://www.youtube.com/watch?v=0QHmDvc9abs](https://www.youtube.com/watch?v=0QHmDvc9abs)
+* Tutorial in Textform mit Schaubild und Beispielen: [https://www.softwaretestinghelp.com/xpath-writing-cheat-sheet-tutorial-examples/](https://www.softwaretestinghelp.com/xpath-writing-cheat-sheet-tutorial-examples/)
+* Liste der wichtigsten XPath Ausdrücke: [https://www.w3schools.com/xml/xpath_syntax.asp](https://www.w3schools.com/xml/xpath_syntax.asp)
+* XPath Cheatsheet: [https://devhints.io/xpath](https://devhints.io/xpath)
+* XPath Tester: [https://extendsclass.com/xpath-tester.html](https://extendsclass.com/xpath-tester.html)
+
+\vspace{4mm}
+
+**Aufgabe 3: Projektarbeit** 
+
+Beschreibt kurz eure Idee für eine Projektarbeit. Wenn ihr noch keine Idee habt oder keine Projektarbeit für dieses Seminar schreiben wollt, denkt euch ein fiktives Forschungsprojekt aus. Denkt euch dazu eine Fragestellung aus und überlegt, auf  Grundlage welcher Texte sich diese beantworten lassen könnte. Auf die Operationalisierung der Fragestellung müsst ihr dabei noch nicht eingehen. 
+
+* Recherchiert, ob und wenn ja wo und in welchem Dateiformat die gesuchten Texte zur Verfügung stehen (Plaintext, XML-TEI, PDF, eBook-Dateiformate,...). Gibt es die Texte in einem Volltextrepositorium wie wikisource.org, projekt-gutenberg.org, gutenberg.org oder textgridrep.org? Gibt es die Texte im Katalog einer Bibliothek oder eines Online-Archivs? Handelt es sich um "born digital" Textarten wie Kommentare auf einer Social Media Plattform, Userbewertungen auf goodreads.com oder Fanfiction von archiveofourown.org? 
+* Wenn ihr eine oder mehrere Webseiten identifiziert habt, welche die gesuchten Texte bereitstellen, überprüft, ob es die gesuchten Texte als **Data Dump** zur Verfügung gibt. Recherchiert auch, ob vielleicht ein anderes Forschungsprojekt bereits mit diesen Texten gearbeitet hat und ein Korpus zusammengestellt hat. Überprüft dann durch Google-Suche und Suche auf der Webseite der Institution, welche die Texte bereitstellt, ob es vielleicht eine **API** gibt, über die die Daten abgefragt werden können. Dokumentiert das Ergebnis eurer Recherche im Rahmen dieser Übungsaufgabe.   
+* Wenn es eine API gibt, lest den [Abschnitt APIs](https://lipogg.github.io/webscraping-mit-python/chapters/08/subchapters/01_apis.html) auf der Webseite zu meinem Webscraping-Seminar. Wenn es keine API gibt, lest das [Kapitel Einstieg Webscraping](https://lipogg.github.io/webscraping-mit-python/chapters/06/06_intro.html): https://lipogg.github.io/webscraping-mit-python/.
+
+\vspace{4mm}
+
+**Von den folgenden zwei Praxisaufgaben dürft ihr euch je nach Interesse und Projektarbeit eine zur Bearbeitung auswählen.**
+
+**Aufgabe 4a: APIs**
+
+In dieser Aufgabe sollt ihr den Code im [Abschnitt 11.1 "Beispiel API: DraCor"](https://lipogg.github.io/textanalyse-mit-r/exkurs-web-scraping-und-apis.html#beispiel-api-dracor) reproduzieren. Dazu müsst ihr nur den Code anpassen und die entsprechenden Variablen und die Zugriffsoperationen zur Extraktion der Dramen-Kurztitel ändern.  
+
+1.) Stellt eine Anfrage an den Endpunkt stage directions (statt wie im Beispiel an den spoken text-Endpunkt) und extrahiert alle Bühnenanweisungen zu Dramen von Molière aus dem französischsprachigen Dramenkorpus. 
+
+2.) Verseht euren Code mit Kommentaren die erläutern, was in den einzelnen Zeilen passiert. Nutzt zum Verstänndis auch die R Dokumentationsseiten. 
+
+**Aufgabe 4b: Web Scraping**
+
+In dieser Aufgabe sollt ihr die Zitate von der Seite https://quotes.toscrape.com/ mithilfe von Web Scraping extrahieren. Zur Bearbeitung dieser Aufgabe könnt ihr den Code im [Abschnitt 11.2 "Beispiel Web Scraping: Wikisource"](https://lipogg.github.io/textanalyse-mit-r/exkurs-web-scraping-und-apis.html#beispiel-web-scraping-wikisource) nutzen, ihr müsst aber natürlich die URL und den XPath-Ausdruck austauschen und die for-Schleife so anpassen, dass in jedem Schleifendurchlauf ein Zitat auf dem Bildschirm ausgegeben wird. Um den XPath-Ausdruck zu schreiben, müsst ihr erst die Struktur der Webseite in den Browser-Entwicklertools betrachten und verstehen, in welchem HTML-Element sich die Zitattexte befinden und welche Attribute erlauben, die HTML-Elemente mit den Zitattexten eindeutig zu identifizieren. 
+
+>Hinweis: Wenn ihr nicht sicher seid, ob euer XPath-Ausdruck die richtigen Elemente findet, könnt ihr den Ausdruck in den Browser-Entwicklertools ausprobieren. Öffnet dazu die Entwicklertools und gebt Strg + F ein, sodass sich in den Entwicklertools eine Suchleiste öffnet. Fügt den XPath-Ausdruck ein und drückt Enter. 
+
+

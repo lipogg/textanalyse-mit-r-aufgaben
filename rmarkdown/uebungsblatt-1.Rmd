@@ -1,0 +1,82 @@
+---
+title: "Übungsblatt Nr. 1"
+author: "Textanalyse mit R WiSe 2024/25 - Lisa Poggel"
+date: "Abgabe bis 28.10.2024, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+**Aufgabe 1: Wiederholung **
+
+Lest euch nochmal die Inhalte zur Sitzung heute unter dem neuen Kapitel "R Basics I" auf unserer [Kurs-Website](https://lipogg.github.io/textanalyse-mit-r/) durch. Formuliert eine Frage zu einem Inhalt, der euch noch nicht ganz klar ist und bringt eure Frage(n) nächste Woche mit. 
+
+\hspace{50mm}
+
+**Aufgabe 2: Begriffsklärung** 
+
+1.) Erläutert kurz in euren eigenen Worten die folgenden Begriffe: Kommentar, character (string), Datentyp, Variable, Operatorpräzedenz, Zuweisung
+
+2.) Welchen Datentyp haben die folgenden Objekte? 
+
+```{r results = FALSE}
+TRUE
+"TRUE"
+12^4
+" "
+8
+"Hallo! Es ist ein schöner Tag heute."
+```
+
+
+3.) Zu welchem Wert werden die folgenden Ausdrücke evaluiert? Beantwortet die Frage ohne die Hilfe von R und RStudio! Beachtet dabei die Operatorpräzedenz. 
+
+```{r results = FALSE}
+TRUE & FALSE
+FALSE == !TRUE
+TRUE | FALSE 
+"a" == "b"
+"Hund" != "Hand"
+4 + 5 > 3 + 5
+(4 + 5 > 3 + 5) != (8 + 2 < 6 + 7)
+32 <= 32 
+50 >= 60
+32 <= 32 & 50 >= 60
+"Katze" == 6 + 7 & TRUE 
+
+```
+
+\hspace{50mm}
+
+**Aufgabe 3: Praxis**
+
+1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Hinweis: Falls ihr das Dokument auf eurem Computer nicht findet, schaut im RStudio im Fenster unten rechts unter "Files", in welchem Verzeichnis (Ordner) ihr euch gerade befindet. Dort sollte die Datei liegen.
+
+2.) Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nummer des Übungsblatts und eurem Namen. 
+
+3.) Denkt euch einen passenden Namen für eine Variable aus, die als Platzhalter für euren Vornamen dienen soll. Weist der Variable euren Vornamen als Wert vom Typ character zu. 
+
+4.) Lasst euch die Variable mit der Funktion `print()` auf dem Bildschirm ausgeben. 
+
+5.) Erstellt eine zweite Variable und weist ihr als Wert einen anderen Vornamen zu. 
+
+6.) Überprüft mithilfe eines geeigneten Operators, ob den beiden Variablen derselbe Wert zugeordnet ist. 
+
+7.) Vereinfacht die folgenden vier Codezeilen, indem ihr für wiederkehrende Werte und Ausdrücke Variablen definiert und einsetzt.
+
+```{r results = FALSE}
+"König" == "Frosch"
+("König" == "Königin") != "Frosch"
+nchar("Es war einmal ein König") == 25
+nchar("Ein schöner Frosch") == 23 & TRUE
+
+```
+
+
+
+
+
+
