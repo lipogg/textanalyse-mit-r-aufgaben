@@ -1,6 +1,6 @@
 ---
 title: "Übungsblatt Nr. 2"
-author: "Textanalyse mit R WiSe 2024/25 - Lisa Poggel"
+author: "Textanalyse mit R - Lisa Poggel"
 date: "Abgabe bis 28.10.2024, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
 output: 
   learnr::tutorial:
@@ -11,40 +11,7 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 library(tutorial.helpers)
-
-
-custom_question_text <- function(text, 
-                                 variants,
-                                 correct_msg = "Super, das ist richtig!",
-                                 incorrect_msg = "Leider nicht richtig.", 
-                                 allow_retry = FALSE,
-                                 placeholder = "Antwort eingeben...") {
-  
-  check_answer <- function(value, variants) {
-    
-    normalized_value <- tolower(value) |>
-      trimws() |> 
-      gsub("[[:punct:]]+", "", x = _)
-    
-    if (normalized_value %in% tolower(variants)) {
-      return(mark_as(TRUE))
-    }
-    return(mark_as(FALSE))
-  }
-
-  # https://github.com/rstudio/learnr/discussions/797
-  formals(check_answer)$variants <- variants
-  
-  question_text(
-    text,
-    answer_fn(check_answer),
-    correct = correct_msg,
-    incorrect = incorrect_msg,
-    allow_retry = allow_retry,
-    placeholder = placeholder
-  )
-}
-
+library(textanalyse.aufgaben) # for custom_question_text function
 
 knitr::opts_chunk$set(echo = FALSE, tidy = FALSE)
 ```
