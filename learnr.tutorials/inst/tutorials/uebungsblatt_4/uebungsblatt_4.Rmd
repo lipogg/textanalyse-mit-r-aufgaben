@@ -1,0 +1,269 @@
+---
+title: "Übungsblatt Nr. 4"
+author: "Textanalyse mit R - Lisa Poggel"
+date: "Abgabe bis 28.10.2024, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
+output: 
+  learnr::tutorial:
+    language: de
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tutorial.helpers)
+library(learnr.tutorials) # for custom_question_text function
+
+knitr::opts_chunk$set(echo = FALSE, tidy = FALSE)
+```
+
+
+## Aufgabe 1: Wiederholung
+
+Lest euch nochmal die Inhalte zur Sitzung heute unter dem neuen Kapitel "R Basics III" auf unserer [Kurs-Website](https://lipogg.github.io/textanalyse-mit-r/) durch. Formuliert ein bis drei Fragen zu einem Inhalt, der euch noch nicht ganz klar ist.
+
+```{r manual_frage1}
+question_text(
+  "Frage 1:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r manual_frage2}
+question_text(
+  "Frage 2:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r manual_frage3}
+question_text(
+  "Frage 3:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+## Aufgabe 2: Verständnis
+
+#### 1.) Beantwortet die folgenden beiden Fragen.
+
+```{r quiz}
+quiz(
+  caption = "",
+  question("Welche ist die korrekte Syntax für den Schleifenkopf einer for-Schleife?",
+    answer("for(variable in objekt)"),
+    answer("for (variable in objekt)", correct = TRUE),
+    answer("for variable in objekt"),
+    answer("for bedingung"),
+    incorrect = "Leider nicht richtig. Richtig wäre: for (variable in objekt)", 
+    correct = "Super, das ist richtig!",
+    allow_retry = FALSE
+  ),
+  question("Welche Syntax ist korrekt für den Schleifenkopf einer while-Schleife?",
+    answer("while variable in objekt"),
+    answer("while bedingung", correct = TRUE),
+    answer("while(bedingung)"),
+    answer("while (bedingung)", correct = TRUE),
+    incorrect = "Leider nicht richtig. Richtig wäre: while (bedingung)", 
+    correct = "Super, das ist richtig!",
+    allow_retry = FALSE
+  )
+)
+```
+
+#### 2.) Was ist der Unterschied zwischen der for-Schleife und der while-Schleife? Überlegt euch je ein Beispiel für eine Situation, in der eine for-Schleife bzw. eine while-Schleife geeigneter ist.
+
+```{r manual_forschleife}
+question_text(
+  "Beispiel for-Schleife",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+```{r manual_whileschleife}
+question_text(
+  "Beispiel while-Schleife",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+
+### 3.) Was wird jeweils im dritten Schleifendurchlauf ausgegeben? Beantwortet die Frage ohne die Hilfe von R und RStudio!
+
+```{r eval=FALSE, echo=TRUE}
+blumen <- c("Tulpe", "Rose", "Narzisse", "Geranie")
+
+for (blume in blumen) {
+  print(blume)
+}
+```
+
+```{r q2_3_1}
+custom_question_text(
+  text = " ", 
+  variants = c("Narzisse"), 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: Narzisse"
+  )
+```
+
+```{r eval=FALSE, echo=TRUE}
+blumen <- c("Tulpe", "Rose", "Narzisse", "Geranie")
+
+for (i in seq_along(blumen)) {
+  print(i)
+}
+```
+
+```{r q2_3_2}
+custom_question_text(
+  text = " ", 
+  variants = c("3"), 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: 3"
+  )
+```
+
+
+```{r eval=FALSE, echo=TRUE}
+blumen <- c("Tulpe", "Rose", "Narzisse", "Geranie")
+
+for (i in seq_along(blumen)) {
+  print(blumen[i])
+}
+```
+
+```{r q2_3_3}
+custom_question_text(
+  text = " ", 
+  variants = c("Narzisse"), 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: Narzisse"
+  )
+```
+
+#### 4.) Fügt über jeder Zeile im folgenden Code einen Kommentar hinzu, der in euren eigenen Worten beschreibt, was in der jeweiligen Zeile passiert. 
+
+*Stellt euch dazu folgende Situation vor: In eurer Freizeit geht ihr gerne zu Starbucks und trinkt einen Frappuchino, der aktuell 8€ kostet. Ihr habt ein Nettoeinkommen von 900€. Diesen Monat habt ihr schon 650€ für Miete, Essen, Internet und Sonstiges ausgegegeben. Da sowohl der Frappuchinopreis als auch eure monatlichen Ausgaben und natürlich das aktuelle Datum variieren, habt ihr ein kleines Skript geschrieben, das euch die Planung eures Frappuchinokonsums erleichtern soll. Was macht der folgende Code? Beschreibt in euren eigenen Worten, was in jeder Zeile passiert. Ihr dürft den Code zum Verständnis auch im RStudio ausführen und einzelne Werte ändern oder euch in jedem Durchlauf der while-Schleife den Wert der Variablen ausgeben lassen.* 
+
+#### Wenn ihr alle Kommentare hinzugefügt habt, führt den Code durch Klick auf "Code ausführen" einmal aus. Erst dann sind eure Kommentare gespeichert. Durch Klick auf "Lösung" könnt ihr euch nach der Bearbeitung eine Beispiellösung anschauen.
+
+*Tipp: Wenn ihr Schwierigkeiten habt zu verstehen, was im Code passiert, dann beschreibt laut, was in jeder Zeile passiert, so, wie wir es in der Stunde geübt haben.*
+
+```{r frappuchino, exercise=TRUE, exercise.eval=FALSE, tidy = FALSE}
+
+einkommen <- 900
+ausgaben <- 650
+kaffeepreis <- 8
+frappuchinos <- 0
+datum <- list(12, "Mai")
+lange_monate <- c("Januar", "März", "Mai", "Juli", "August", "Oktober", "Dezember")
+kurze_monate <- c("April", "Juni", "September", "November")
+
+if (datum[[2]] %in% lange_monate) {
+  tage <- 31 - datum[[1]]
+} else if (datum[[2]] %in% kurze_monate) {
+  tage <- 30 - datum[[1]]
+} else {
+  tage <- 28 - datum[[1]]
+}
+
+while ((einkommen - ausgaben) > kaffeepreis) {
+  ausgaben <- ausgaben + kaffeepreis
+  frappuchinos <- frappuchinos + 1
+}
+
+nachricht <- paste("Du kannst diesen Monat noch", frappuchinos, 
+  "Frappuchinos trinken. Das sind", frappuchinos / tage, "Frappuchinos am Tag.")
+print(nachricht)
+
+```
+
+
+```{r frappuchino-solution}
+# Dem Namen einkommen den Wert 900 zuweisen
+# Oder: Variable einkommen erstellen
+einkommen <- 900
+# Dem Namen ausgaben den Wert 650 zuweisen
+# Oder: Variable ausgaben erstellen
+ausgaben <- 650
+# Dem Namen kaffeepreis den Wert 8 zuweisen
+# Oder: Variable kaffeepreis erstellen
+kaffeepreis <- 8
+# Dem Namen frappuchinos den Wert 0 zuweisen
+# Oder: Variable frappuchinos erstellen
+frappuchinos <- 0
+# Dem Namen datum die Liste list(..) zuweisen
+# Oder: Variable datum erstellen
+datum <- list(12, "Mai")
+# Dem Namen lange_monate den Vektor mit Monatsnamen mit 31 Tagen zuweisen
+lange_monate <- c("Januar", "März", "Mai", "Juli", "August", "Oktober", "Dezember")
+# Dem Namen kurze_monate den Vektor mit Monatsnamen mit 30 Tagen zuweisen
+kurze_monate <- c("April", "Juni", "September", "November")
+
+# Wenn der zweite Eintrag in datum (der Monatsname) in lange_monate vorkommt,
+# dann Variable tage auf 31 minus dem ersten Eintrag in datum setzen
+if (datum[[2]] %in% lange_monate) {
+  tage <- 31 - datum[[1]]
+# Andernfalls, wenn der Monat in kurze_monate vorkommt,
+# dann tage auf 30 minus dem ersten Eintrag in datum setzen
+} else if (datum[[2]] %in% kurze_monate) {
+  tage <- 30 - datum[[1]]
+# Wenn der Monat weder in lange_monate noch in kurze_monate vorkommt,
+# dann tage auf 28 minus dem ersten Eintrag in datum setzen (Februar)
+} else {
+  tage <- 28 - datum[[1]]
+}
+
+# Solange der Betrag, der nach Abzug der Ausgaben vom Einkommen übrig bleibt,
+# größer ist als der Preis für einen Kaffee, kaffeepreis zu ausgaben addieren 
+# und frappuchinos um 1 erhöhen
+while ((einkommen - ausgaben) > kaffeepreis) {
+  ausgaben <- ausgaben + kaffeepreis
+  frappuchinos <- frappuchinos + 1
+}
+
+# Nachricht zusammenfügen
+nachricht <- paste("Du kannst diesen Monat noch", frappuchinos, 
+  "Frappuchinos trinken. Das sind", frappuchinos / tage, "Frappuchinos am Tag.")
+# Nachricht ausgeben
+print(nachricht)
+```
+
+
+## Aufgabe 3: Praxis
+
+1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nummer des Übungsblatts und den Namen aller Bearbeiter:innen. 
+
+2.) Erstellt einen Vektor mit den Namen eurer Lieblingsmusiker:innen als Elemente. Überprüft mithilfe einer if-Anweisung, ob die Zeichenkette "Rihanna" im Vektor enthalten ist. Falls die Zeichenkette enthalten ist, soll die Nachricht "Rihanna ist eine meiner Lieblingskünstlerinnen" auf dem Bildschirm ausgegeben werden.
+
+3.) Überprüft jetzt mithilfe einer weiteren if-Anweisung, ob der Wert des zweiten Elements in dem Vektor mit euren Lieblingsmusiker:innen der Zeichenkette "Mozart" entspricht. Falls diese Bedingung erfüllt ist, soll die Zeichenkette "Mozart" durch die Zeichenkette "Chopin" ersetzt werden. Falls die Bedingung nicht erfüllt ist, soll dem Vektor ein neues Element mit dem Wert "Chopin" hinzugefügt werden. 
+
+4.) Erstellt einen leeren Vektor und weist ihn der Variable `laenge` zu.
+
+5.) Erstellt jetzt eine Schleife, die in jedem Schleifendurchgang die Länge der Namen eurer Lieblingsmusiker:innen aus dem Vektor mit euren Lieblingsmusiker:innen bestimmt und die Wortlänge als Element dem Vektor `laenge` hinzufügt. 
+
+*Hinweis: Zur Bestimmung der Anzahl von Zeichen in Zeichenketten könnt ihr die Funktion `nchar()` verwenden. Ein Element kann einem Vektor hinzugefügt werden, indem der Vektor mit dem neuen Element in einen neuen Vektor kombiniert wird: `neuer_vektor <- c(alter_vektor, neues_element)`.*
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
+
