@@ -11,7 +11,7 @@ runtime: shiny_prerendered
 ```{r setup, include=FALSE}
 library(learnr)
 library(tutorial.helpers)
-library(textanalyse.aufgaben) # for custom_question_text function
+library(learnr.tutorials) # for custom_question_text function
 
 knitr::opts_chunk$set(echo = FALSE)
 ```
