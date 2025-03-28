@@ -4,8 +4,8 @@ Sammlung von Übungszetteln für mein Seminar "Textanalyse mit R für die Geiste
 
 ## Inhalt
 
-- `textanalyse.aufgaben`: Übungszettel im Format interaktiver R *learnr*-Tutorials, gebündelt als R-Paket. Die Tutorials können installiert und interaktiv im RStudio oder im Browser ausgeführt werden (Installationsanleitung s.u.).
-- `rmarkdown`: Übungszettel im R Markdown-Format, die in RStudio (über den Button "Knit") in PDF-Dateien umgewandelt werden können.  
+- `textanalyse.aufgaben/`: Übungszettel im Format interaktiver R *learnr*-Tutorials, gebündelt als R-Paket. Die Tutorials können installiert und interaktiv im RStudio oder im Browser ausgeführt werden (Installationsanleitung s.u.).
+- `rmarkdown/`: Übungszettel im R Markdown-Format, die in RStudio (über den Button "Knit") in PDF-Dateien umgewandelt werden können.  
 
 ## Installation 
 
