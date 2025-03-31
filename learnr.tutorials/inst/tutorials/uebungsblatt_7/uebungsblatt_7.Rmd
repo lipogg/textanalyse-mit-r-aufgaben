@@ -1,0 +1,186 @@
+---
+title: "Übungsblatt Nr. 7"
+author: "Textanalyse mit R - Lisa Poggel"
+date: "Abgabe bis 28.10.2024, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
+output: 
+  learnr::tutorial:
+    language: de
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tutorial.helpers)
+library(learnr.tutorials) # for custom_question_text function
+
+knitr::opts_chunk$set(echo = FALSE, tidy = FALSE)
+```
+
+
+## Aufgabe 1: Wiederholung
+
+Lest euch nochmal die Inhalte zur Sitzung heute unter dem neuen Kapitel "Textanalyse I" auf unserer [Kurs-Website](https://lipogg.github.io/textanalyse-mit-r/) durch. Formuliert ein bis drei Fragen zu einem Inhalt, der euch noch nicht ganz klar ist.
+
+```{r manual_frage1}
+question_text(
+  "Frage 1:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r manual_frage2}
+question_text(
+  "Frage 2:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r manual_frage3}
+question_text(
+  "Frage 3:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+## Aufgabe 2: Einstieg Textanalyse
+
+#### 1.) Erläutert kurz in euren eigenen Worten die folgenden Begriffe:
+
+```{r manual_kommentar}
+question_text(
+  "Token",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r manual_character}
+question_text(
+  "Type",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r manual_datentyp}
+question_text(
+  "Korpus",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+#### 2.) Wie viele Tokens und Types haben die folgenden Sätze?
+
+>Eine Rose ist eine Rose, aber eine Tulpe ist keine Rose.
+
+```{r q2_2_1_tokens}
+custom_question_text(
+  text = "Tokens", 
+  variants = c("13"), 
+  incorrect_msg = "Wenn Satzzeichen als Tokens gezählt werden: 13"
+  )
+```
+
+```{r q2_2_1_types}
+custom_question_text(
+  text = "Types", 
+  variants = c("9"), 
+  incorrect_msg = "Nach unserer Definition sind Eine und eine unterschiedliche Types. Der Satz hat also 9 Types: Eine, Rose, ist, eine, Komma, aber, Tulpe, keine, Punkt."
+  )
+```
+
+>Hallo mein Name ist Mr. Robert De Niro und das ist meine Telefonnummer: 0164-452954322. #callme
+
+```{r q2_2_2_tokens}
+custom_question_text(
+  text = "Tokens", 
+  variants = c("18", "17", "16"), 
+  incorrect_msg = "Die Tokenanzahl kann sich unterscheiden, je nachdem, ob z.B. Mr. als ein Token gezählt wird, oder Mr und Punkt als zwei separate Tokens aufgefasst werden. Es gibt deswegen zu dieser Frage mehrere korrekte Antworten, aber im Rahmen dieser Aufgabe wären 16, 17 oder 18 korrekt.",
+  correct_msg = "Die Tokenanzahl kann sich unterscheiden, je nachdem, ob z.B. Mr. als ein Token gezählt wird, oder Mr und Punkt als zwei separate Tokens aufgefasst werden. Es gibt deswegen zu dieser Frage mehrere korrekte Antworten, aber im Rahmen dieser Aufgabe wären 16, 17 oder 18 korrekt."
+  )
+```
+
+```{r q2_2_2_types}
+custom_question_text(
+  text = "Types", 
+  variants = c("14, 15, 16, 17"), 
+  incorrect_msg = "Je nachdem, wie die Tokens gezählt wurden, kann sich auch die Anzahl der Types unterscheiden. Es wiederholen sich nur das ist und der Punkt, allerdings nur dann, wenn Mr und Punkt als separate Tokens aufgefasst wurden. Es gibt deswegen zu dieser Frage mehrere korrekte Antworten, aber im Rahmen dieser Aufgabe wären 14, 15, 16 oder 17 korrekt.",
+  correct_msg = "Je nachdem, wie die Tokens gezählt wurden, kann sich auch die Anzahl der Types unterscheiden. Es wiederholen sich nur das ist und der Punkt, allerdings nur dann, wenn Mr und Punkt als separate Tokens aufgefasst wurden. Es gibt deswegen zu dieser Frage mehrere korrekte Antworten, aber im Rahmen dieser Aufgabe wären 14, 15, 16 oder 17 korrekt."
+  )
+```
+
+#### Die beiden Beispielsätze enthalten neben Wörtern und Zahlen auch Satzzeichen und Sonderzeichen. Gibt es in den beiden Sätzen Äußerungen, die zwar keine Wörter sind, aber trotzdem eine Sinneinheit bilden? Und sind Satzzeichen eigentlich auch Tokens, was vermutet ihr?
+
+```{r manual_types_tokens}
+question_text(
+  "",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+#### 3.) Lest die folgenden beiden Texte (unter "Kursmaterial" im Blackbaord):
+
+- Stoltz, Dustin S. und Taylor, Marshall A. (2024). *Mapping Texts. Computational Text Analysis for the Social Sciences. Ch.2: Corpus Building*, https://global.oup.com/academic/product/mapping-texts-9780197756881.
+- Jünger, J. und Gärtner, C. (2023), *Computational Methods für die Sozial- und Geisteswissenschaften. Kapitel 9: Textanalyse,* S. 356-373, [https://doi.org/10.1007/978-3-658-37747-2_9](https://doi.org/10.1007/978-3-658-37747-2_9) (also alles bis "9.2: Diktionärbasierte Inhaltsanalyse"). 
+
+*Der Text von Stoltz und Taylor soll euch vor allem einen Eindruck von verschiedenen Methoden der Korpuszusammenstellung verschaffen und für einige Fallstricke sensibilisieren. Der Text von Jünger und Gärtner dient als Vorblick auf die Inhalte der nächsten beiden Stunden. Achtet beim Lesen nicht so sehr auf die Details oder Begriffe, die ihr noch nicht kennt, sondern eher auf den groben Ablauf einer  Textanalyse. Den R Code könnt bzw. sollt ihr einfach ignorieren; wir werden den Code etwas anders schreiben. *
+
+## Aufgabe 3: Praxis Tokens und Types
+
+*Den Code zu diesen Aufgaben findet ihr auf der Kurswebsite in den Abschnitten 5.5 "Textdateien einlesen", 5.7 "Quanteda corpus-Objekte" und 5.8 "Quanteda tokens-Objekte". Falls ihr bei der Bearbeitung der Praxisaufgaben Schwierigkeiten haben solltet, bearbeitet die Aufgaben nur so weit, wie ihr kommt und konzentriert euch auf die Lektüre der Texte.* 
+
+1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nummer des Übungsblatts und eurem Namen.  
+
+2.) Ladet das Paket `quanteda`. Wenn ihr das Paket in der Sitzung am Dienstag noch nicht installiert habt, installiert es erst mit der Funktion `install.packages()` und ladet es dann.  
+
+3.) Wir wollen zunächst die quanteda `tokens()`-Funktion besser kennenlernen. Erstellt zunächst eine neue Variable und weist ihr den Satz "Eine Rose ist eine Rose, aber eine Tulpe ist keine Rose." als Wert zu. "Tokenisiert" jetzt den Satz mithife der quanteda-Funktion `tokens()`. Schaut euch die Ausgabe an. Sind Satzzeichen in quanteda auch Tokens? 
+Hinweis: Tokenisieren ist einfach ein anderer Ausdruck für "in Tokens zerlegen". 
+
+4.) Überprüft eure Antwort zur Teilaufgabe 2.2): In wie viele Tokens zerlegt Quanteda den Text? Sucht dazu jetzt in den  quanteda-Dokumentationsseiten [https://quanteda.io](https://quanteda.io) nach einer Funktion, welche ein tokens-Objekt als Argument annimmt und die Anzahl der Tokens als Rückgabewert zurückgibt. Ruft die Funktion mit unserem Beispielsatz als Argument auf. 
+Hinweis: Verwendet die Suchmaske oder schaut auf der Unterseite "Reference" nach. 
+
+5.) Gibt es auch eine quanteda-Funktion, welche die Anzahl von Types in einem tokens-Objekt ausgibt? 
+
+6.) Ladet von der Seite [wikisource.org](https://de.wikisource.org/wiki/Hauptseite) einen beliebigen Text im Plaintext-Format herunter. Klickt dazu auf den Herunterladen-Button, klickt auf "Suchst du ein anderes Format?" und wählt anschließend unter File Format "Plain Text" aus. Setzt das Verzeichnis (also den Ordner auf eurem Computer) als Arbeitsverzeichnis, in dem sich der Text befindet. Also wenn ihr den Text in eurem Downloads-Ordner gespeichert habt, solltet ihr den Downloads-Ordner als Arbeitsverzeichnis setzen. 
+
+*Hinweis: Falls ihr in der Stunde am Dienstag nicht da ward und nicht wisst, wie ihr das Arbeitsverzeichnis setzen könnt, schaut unter "Orientierung im R Studio" auf der Kurswebsite nach oder schaut dieses kurze Video: [https://www.youtube.com/watch?v=FT3THVQj45Q](https://www.youtube.com/watch?v=FT3THVQj45Q)*
+
+7.) Lest den Text mit der Funktion `readtext()` aus dem Paket readtext ein und weist den Text dabei einer Variable zu. Lasst euch den Datentyp der Variable mithilfe der Funktionen `typeof()` und `class()` ausgeben. Was ist der Unterschied?  Hinweis: Wenn ihr am Dienstag nicht da ward, müsst ihr das Paket erst mit `install.packages("readtext")` installieren.  
+
+8.) Erstellt aus dem eingelesenen Text  mithilfe der Funktion `corpus()` ein Quanteda corpus-Objekt. Lasst euch das Objekt auf dem Bildschirm ausgeben.
+
+9.) Wandelt das corpus-Objekt mithilfe der Funktion `tokens()` in ein tokens-Objekt um. Lasst euch das Objekt auf dem Bildschirm ausgeben.  
+
+10.) In wie viele Tokens wurde euer Text zerlegt? Hinweis: Nutzt zur Übung dafür nicht die `ntoken()`-Funktion, sondern greift zuerst auf den Vektor mit den Tokens zu und lasst euch dann die Länge des Vektors mit `length()` ausgeben. Dazu müsst ihr aber erst einmal herausfinden, wie das Quanteda tokens-Objekt in R repräsentiert wird: Als Vektor, als Liste oder als Dataframe? Das könnt ihr mit `typeof()` überprüfen. Entscheidet euch dann für einen passenden Zugriffsoperator. 
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
