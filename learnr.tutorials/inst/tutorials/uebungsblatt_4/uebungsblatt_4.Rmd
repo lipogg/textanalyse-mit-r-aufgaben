@@ -62,7 +62,7 @@ question_text(
 ```{r quiz}
 quiz(
   caption = "",
-  question("Welche ist die korrekte Syntax für den Schleifenkopf einer for-Schleife?",
+  question_radio("Welche ist die korrekte Syntax für den Schleifenkopf einer for-Schleife?",
     answer("for(variable in objekt)"),
     answer("for (variable in objekt)", correct = TRUE),
     answer("for variable in objekt"),
@@ -71,7 +71,7 @@ quiz(
     correct = "Super, das ist richtig!",
     allow_retry = FALSE
   ),
-  question("Welche Syntax ist korrekt für den Schleifenkopf einer while-Schleife?",
+  question_radio("Welche Syntax ist korrekt für den Schleifenkopf einer while-Schleife?",
     answer("while variable in objekt"),
     answer("while bedingung", correct = TRUE),
     answer("while(bedingung)"),
