@@ -1,0 +1,576 @@
+---
+title: "Übungsblatt Nr. 6"
+author: "Textanalyse mit R - Lisa Poggel"
+date: "Abgabe bis 28.10.2024, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
+output: 
+  learnr::tutorial:
+    language: de
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tutorial.helpers)
+library(learnr.tutorials) # for custom_question_text function
+gradethis::gradethis_setup(
+  pass = "Super, das ist richtig!",
+  fail = "Nicht ganz richtig. Versuch es nochmal."
+)
+knitr::opts_chunk$set(echo = FALSE, tidy = FALSE)
+```
+
+
+## Wichtiger Hinweis
+
+Bearbeitet die folgenden Aufgaben eigenverantwortlich nach eurem individuellen Wiederholungsbedarf. Falls ihr die Praxisaufgaben weniger hilfreich findet, dann bearbeitet nur die theoretischen Aufgaben. Besonders empfehle ich euch die Aufgaben 1, 3, 4 und 5. Diese Aufgaben addressieren Schwierigkeiten und Fehler, die mir in euren Lösungen häufig aufgefallen sind. Ihr solltet euch deswegen nochmal meine Korrekturen zu den ersten fünf Übungszetteln ansehen, bevor ihr die Aufgaben beantwortet. Wer häufiger Anmerkungen zur Syntax findet, dem lege ich Aufgabe 2 besonders ans Herz.
+
+Zu den Praxisaufgaben gibt es in dieser Woche keine manuelle Korrektur durch mich. Ihr könnt eure Lösungen aber in jeder Praxisaufgabe durch Klick auf den **Button "Lösung"** mit einer Musterlösung abgleichen. Manche Praxisaufgaben haben zusätzlich einen **Button "Antwort einreichen"**. Durch Klick auf diesen Button werden die Lösungen automatisch mit der Musterlösung abgeglichen und ihr erhaltet eine Nachricht, wenn die Lösung korrekt ist, oder einen Tipp, wenn die Lösung nicht korrekt ist. 
+
+**Nachdem ihr den Übungszettel bearbeitet habt, ladet eure Lösungen wie sonst auch im HTML-Format herunter und schickt mir die HTML-Datei mit euren Lösungen.** 
+
+## Aufgabe 1: Wiederholung Variablen und Operatoren
+
+#### 1.) Welcher Variablenname ist jeweils vorzuziehen? Warum?
+
+```{r quiz1_1}
+quiz(
+  caption = "",
+  question_radio("",
+    answer("neun <- 9"),
+    answer("zahl <- 9", correct = TRUE),
+    incorrect = "Leider nicht richtig. Richtig wäre: zahl <- 9", 
+    correct = "Super, das ist richtig!",
+    message = "Variablen sind Platzhalter für Objekte eines bestimmten Typs. Sie sollten die Bedeutung des dem Variablennamen zugeordneten Werts beschreiben, nicht den konkreten Wert selbst wiederholen. Der konkrete Wert, für den eine Variable zu einem gegebenen Zeitpunkt steht, kann sich zudem möglicherweise im Programmverlauf ändern.",
+    allow_retry = FALSE
+  ),
+  question_radio("",
+    answer('Fahrrad <- "Gravel Bike"'),
+    answer('fahrrad <- "Gravel Bike"', correct = TRUE),
+    incorrect = 'Leider nicht richtig. Richtig wäre: fahrrad <- "Gravel Bike"', 
+    correct = "Super, das ist richtig!",
+    message = "Variablennamen werden laut Style Guide kleingeschrieben.",
+    allow_retry = FALSE
+  ),
+  question_radio("",
+    answer("for (wort in woerter_vektor) {}", correct = TRUE),
+    answer("for (woerter in woerter_vektor) {}"),
+    incorrect = "Leider nicht richtig. Richtig wäre: for (wort in woerter_vektor) {}", 
+    correct = "Super, das ist richtig!",
+    message = "Das Singular betont, dass die Laufvariable wort bzw. woerter in jedem Schleifendurchlauf für ein einzelnes Element aus dem Vektor woerter_vektor steht.",
+    allow_retry = FALSE
+  ),
+  question_radio("",
+    answer("addierte_zahlen <- function(zahl_1, zahl_2) {}"),
+    answer("zahlen_addieren <- function(zahl_1, zahl_2) {}", correct = TRUE),
+    incorrect = "Leider nicht richtig. Richtig wäre: zahlen_addieren <- function(zahl_1, zahl_2) {}",
+    correct = "Super, das ist richtig!",
+    message = "Funktionsnamen sollen laut Style Guide eine Operation beschreiben, und kein Ergebnis.",
+    allow_retry = FALSE
+  )
+)
+
+```
+
+#### 2.) Welcher Operator ist jeweils vorzuziehen? Warum?
+
+*`zahlen` ist jeweils ein Vektor `c(2, 3, 5, 1)`.*
+
+```{r quiz1_2}
+quiz(
+  caption = "",
+  question_radio("",
+    answer("if (8 == zahlen[2]) {}", correct = TRUE),
+    answer("if (8 %in% zahlen[2]) {}"),
+    incorrect = "Leider nicht richtig. Richtig wäre: if (8 == zahlen[2]) {}", 
+    correct = "Super, das ist richtig!",
+    message = "Der Operator %in% wird verwendet, um zu prüfen, ob ein Objekt in einer Menge von Werten enthalten ist – also ob beispielsweise 8 irgendwo im gesamten Vektor zahlen vorkommt. In diesem Fall wird aber mit zahlen[2] auf einen einzelnen Wert im Vektor zahlen zugegriffen. Um zu prüfen, ob dieser Wert gleich 8 ist, ist der Vergleichsoperator == korrekt.",
+    allow_retry = FALSE
+  ),
+  question_radio("",
+    answer("zahlen != 8 & zahlen != 9", correct = TRUE),
+    answer("zahlen != 8 && zahlen != 9"),
+    incorrect = "Leider nicht richtig. Richtig wäre: zahlen != 8 & zahlen != 9", 
+    correct = "Super, das ist richtig!",
+    message = "Der Operator & führt den Vergleich elementweise durch und wird z. B. verwendet, um zwei logische Vektoren elementweise zu vergleichen. Das Ergebnis einer logischen Operation mit & ist deswegen immer ein logischer Vektor. Der Operator && vergleicht dagegen nur die ersten Elemente zweier Vektoren (also einzelne Werte) und ist deswegen nicht geeignet, um ganze Vektoren wie die, die bei der Auswertung der Ausdrücke zahlen != 8 und zahlen != 9 entstehen, miteinander zu vergleichen.", 
+    allow_retry = FALSE
+  )
+)
+
+```
+
+## Aufgabe 2: Wiederholung Syntax
+
+Wir haben in den letzten Stunden viele neue Syntaxregeln kennengelernt und dabei in ganz verschiedenen Kontexten eckige und runde Klammern, geschweifte Klammern oder den `$`-Operator verwendet. Das ist am Anfang sehr verwirrend. Diese Teilaufgabe soll euch dabei helfen, Sicherheit in den Syntaxregeln zu  gewinnen, insbesondere bei der Verwendung von Klammern und dem `$`-Operator. 
+
+Legt zunächst auf einem Blatt Papier (oder in einer Textdatei) eine Tabelle mit je zwei Spalten an. Geht dann nach und nach die vier Kapitel R Basics I-IV durch und sucht alle Anwendungsfälle für die verschiedenen Arten von Klammern und den `$`-Operator heraus. Tragt in die linke Spalte je ein Anwendungsbeispiel für Klammern oder den `$`-Operator ein und tragt in die linke Spalte Stichpunkte zur Erläuterung ein. Achtet darauf, in welchen Fällen um die Klammern Leerzeichen stehen müssen und in welchen nicht. Die Tabelle sieht dann zum Beispiel so aus: 
+
+  | Beispiel |  Bedeutung        |
+  |---------|-------------------|
+  | print() |  Funktionsaufruf  |
+  | df[,3] | Zugriff auf die dritte Spalte eines Dataframes | 
+  | df\$preis |  Zugriff auf die Spalte `preis` eines Dataframes    |
+  | liste[["preis"]] | Zugriff auf das Element mit dem Namen `preis` in einer Liste - Option 1 |
+  | liste\$preis | Zugriff auf das Element mit dem Namen `preis` in einer Liste - Option 2 | 
+  | ... | ... |
+
+
+## Aufgabe 3: Wiederholung Datenstrukturen
+
+*Wenn ihr Probleme mit der Unterscheidung des einfachen und des doppelten Zugriffsoperators [[]] habt, lest euch diesen Abschnitt durch: https://adv-r.hadley.nz/subsetting.html#subset-single.*
+
+#### 1.) Angenommen, wir haben ein Objekt `snacks`. Wie kann man auf das Element mit dem Index 1 zugreifen...
+
+```{r q3_1a}
+question_text(
+  "...wenn `snacks` ein einfacher Vektor ist?",
+  answer("snacks[1]", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Richtig wäre: snacks[1]",
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+```{r q3_1b}
+question_text(
+  "...wenn `snacks` ein benannter Vektor ist?",
+  answer("snacks[1]", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = 'Leider nicht richtig. Richtig wäre: snacks[1].',
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+```{r q3_1c}
+question_text(
+  "...wenn `snacks` eine Liste ist?",
+  answer("snacks[[1]]", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = 'Leider nicht richtig. Richtig wäre: snacks[[1]].',
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+#### 2.) Angenommen, wir haben ein Objekt `snack_preise`. Wie kann man auf das Element mit dem Namen `Chips` zugreifen...
+
+```{r q3_2a}
+question_text(
+  "...wenn `snack_preise` ein benannter Vektor ist?",
+  answer('snacks["Chips"]', correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = 'Leider nicht richtig. Richtig wäre: snacks["Chips"].',
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+```{r q3_2b}
+question_text(
+  "...wenn `snack_preise` eine Liste ist?",
+  answer('snacks[["Chips"]]', correct=TRUE),
+  answer('snacks$Chips', correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = 'Leider nicht richtig. Richtig wäre: snacks[["Chips"]] oder snacks$Chips.',
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+#### 3) Praxis
+
+i) Erstellt eine Matrix mit dem Namen `messwerte_matrix` mit 2 Zeilen und 3 Spalten, die Temperaturdaten (in Grad Celsius) für zwei Tage an drei verschiedenen Standorten enthält. Verwendet  beliebige Temperaturwerte. Weist der Matrix passende Zeilen- und Spaltennamen zu, z.B. "Montag", "Dienstag" für die Zeilen und "Berlin", "Bremen", "Hamburg" für die Spalten.
+
+ii) Wandelt anschließend die Matrix in einen Dataframe um. Verwendet dazu die Funktion `as.data.frame()`. Fügt dem Dataframe eine neue Spalte "Durchschnitt" hinzu, welche die Durchschnittstemperatur für jeden Tag angibt. Den Durchschnitt könnt ihr mithilfe der Funktion `rowMeans()` berechnen. Die Funktion berechnet den Durchschnitt für jede Zeile eines Dataframes und gibt einen Vektor zurück. Beim Funktionsaufruf müsst ihr der Funktion den Dataframe als Argument übergeben. 
+
+iii) Führt zuletzt folgende Zugriffsoperationen aus: Zugriff auf das Element in der zweiten Zeile und der dritten Spalte der Matrix/des Dataframes; Zugriff auf die dritte Spalte der Matrix/des Dataframes; Zugriff auf die Spalte des Dataframes mit dem Namen `Durchschnitt`; Zugriff auf alle Messdaten für den ersten Standort, für die in der Spalte `Durchschnitt` ein Wert größer 20 eingetragen ist.
+
+```{r 3_3, exercise=TRUE}
+
+
+```
+
+```{r 3_3-solution}
+# Musterlösung 
+
+# i) Matrix erstellen
+matrix_temp <- matrix(c(18, 22, 19, 21, 17, 23), nrow = 2)
+matrix_temp
+colnames(matrix_temp) <- c("Ort1", "Ort2", "Ort3")
+rownames(matrix_temp) <- c("Tag1", "Tag2")
+
+# ii) Matrix in DataFrame umwandeln und Spalte 'Durchschnitt' hinzufügen
+df_temp <- as.data.frame(matrix_temp)
+df_temp$Durchschnitt <- rowMeans(df_temp)
+
+# iii) Zugriffsoperationen
+df_temp[2, 3]
+df_temp[, 3]
+df_temp$Durchschnitt
+df_temp$Ort1[df_temp$Durchschnitt > 20]
+
+```
+
+
+## Aufgabe 4: Wiederholung Kontrollstrukturen
+
+#### 1.) Angenommen, wir wollen eine for-Schleife erstellen, die einen Vektor `vec` durchläuft. In jedem Schleifendurchlauf soll ein Element des Vektors verändert werden. Welche for-Schleife ist vorzuziehen? Warum? 
+
+```{r quiz4_1}
+quiz(
+  caption = "",
+  question_radio("",
+    answer("for (elem in vec) {}"),
+    answer("for (i in seq_along(vec)) {}", correct = TRUE),
+    incorrect = "Leider nicht richtig. Richtig wäre: for (i in seq_along(vec)) {}", 
+    correct = "Super, das ist richtig!",
+    message = "Die Variante `for (i in seq_along(vec))` ist vorzuziehen, weil mithilfe der Laufvariable i im Schleifenkörper auf die Elemente im Vektor vec zugegriffen werden kann und so die Elemente des Vektors direkt verändert werden können. In der Variante `for (elem in vec)` steht die Laufvariable `elem` nur für den Wert des Elements im Vektor vec, aber nicht für das Element selbst – Änderungen daran wirken sich also nicht auf den ursprünglichen Vektor aus.",
+    allow_retry = FALSE
+  )
+)
+
+```
+
+#### 2.) Angenommen, wir wollen eine for-Schleife erstellen, die einen Vektor `vec` durchläuft. In jedem Schleifendurchlauf soll der Wert des aktuellen Elements mit einem gegebenen Wert x verglichen werden. Wenn der Wert des Elements gleich x ist, dann soll eine Meldung ausgegeben werden. Welche for-Schleife ist vorzuziehen? Warum? 
+
+```{r quiz4_2}
+quiz(
+  caption = "",
+  question_radio("",
+    answer("for (elem in vec) {}", correct = TRUE),
+    answer("for (i in seq_along(vec)) {}"),
+    incorrect = "Leider nicht richtig. Richtig wäre: for (elem in vec) {}", 
+    correct = "Super, das ist richtig!",
+    message = "Die Variante `for (elem in vec)` ist hier vorzuziehen, weil nur der Wert jedes Elements mit `x` verglichen werden soll. In diesem Fall ist kein Zugriff auf Elemente des Vektors mithilfe der Indizes notwendig und es sollen keine Werte im Vektor verändert werden – deshalb ist die kürzere und lesbarere Form mit `elem` die bessere Wahl.",
+    allow_retry = FALSE
+  )
+)
+
+```
+
+#### 3.) Wie muss der Schleifenkörper der folgenden while-Schleife verändert werden, damit die Schleife nicht unendlich läuft? 
+
+```{r loop, exercise=TRUE}
+
+n <- 24
+
+while (n > 10) {
+  print("Noch mehr als 10 Tage bis Weihnachten :-(")
+}
+
+```
+
+```{r loop-solution}
+# solution1 ----
+n <- 24
+
+while (n > 10) {
+  print("Noch mehr als 10 Tage bis Weihnachten :-(")
+  n <- n - 1
+}
+
+# solution2 ----
+n <- 24
+
+while (n > 10) {
+  n <- n - 1
+  print("Noch mehr als 10 Tage bis Weihnachten :-(")
+}
+
+```
+
+```{r loop-code-check} 
+# pipe-code-check nicht pipe-check!
+
+grade_this({
+  if (.user_code %in% .solution_code_all) {
+    pass("Super, das ist richtig!")
+  } else {
+    fail("Nicht ganz richtig. Versuch es nochmal.")
+  }
+  })
+
+```
+
+#### 4.) Wie kann man die folgenden Probleme OHNE Verwendung einer Schleife lösen? Es soll dabei jeweils  Vektorisierung zum Einsatz kommen. Gebt jeweils ein Codebeispiel an.
+
+a) Alle Elemente des Vektors `zahlen` sollen mit der Zahl 5 addiert werden.
+
+```{r 4_4a, exercise=TRUE}
+zahlen <- c(2, 45, 7, 19)
+
+```
+
+```{r 4_4a-solution}
+# solution1 ----
+zahlen <- c(2, 45, 7, 19)
+zahlen + 5
+
+# solution2 ----
+zahlen <- c(2, 45, 7, 19)
+
+zahlen + 5
+
+# solution3 ----
+zahlen <- c(2, 45, 7, 19)
+zahlen <- zahlen + 5
+
+# solution4 ----
+zahlen <- c(2, 45, 7, 19)
+
+zahlen <- zahlen + 5
+```
+
+```{r 4_4a-code-check} 
+# pipe-code-check nicht pipe-check!
+
+
+grade_this({
+  if (.user_code %in% .solution_code_all) {
+    pass("Super, das ist richtig!")
+  } else {
+    fail("Nicht ganz richtig. Versuch es nochmal.")
+  }
+  })
+
+```
+
+b) Ihr wollt herausfinden, wie häufig jedes Wort in einem Roman vorkommt.  
+
+```{r 4_4b, exercise=TRUE}
+roman <- "At 19.00 hours, ship’s time, I made my way to the launching bay. The men around the shaft stood aside to let me pass, and I climbed down into the capsule. Inside the narrow cockpit, there was scarcely room to move. I attached the hose to the valve on my space suit and it inflated rapidly. From then on, I was incapable of making the smallest movement. There I stood, or rather hung suspended, enveloped in my pneumatic suit and yoke to the metal hull."
+
+```
+
+```{r 4_4b-solution}
+
+roman <- "At 19.00 hours, ship’s time, I made my way to the launching bay. The men around the shaft stood aside to let me pass, and I climbed down into the capsule. Inside the narrow cockpit, there was scarcely room to move. I attached the hose to the valve on my space suit and it inflated rapidly. From then on, I was incapable of making the smallest movement. There I stood, or rather hung suspended, enveloped in my pneumatic suit and yoke to the metal hull."
+
+roman_freq <- strsplit(roman, " ")[[1]]
+table(roman_freq)
+
+```
+
+```{r 4_4b-check} 
+
+grade_this_code(allow_partial_matching = TRUE)
+
+```
+
+c) Die Elemente aus zwei verschiedenen character-Vektoren sollen paarweise in einem neuen Vektor zusammengefügt werden. Also wenn die Vektoren `c("Hallo", "Hi")` und `c("Max", "Moritz")` sind, soll ein neuer Vektor `c("Hallo Max", "Hi Moritz")` herauskommen. 
+
+```{r 4_4c, exercise=TRUE}
+begruessungen <- c("Hallo", "Hi")
+vornamen <- c("Max", "Moritz")
+
+```
+
+```{r 4_4c-solution}
+
+begruessungen <- c("Hallo", "Hi")
+vornamen <- c("Max", "Moritz")
+
+paste(begruessungen, vornamen)
+
+```
+
+```{r 4_4c-check} 
+
+grade_this_code(allow_partial_matching = TRUE)
+
+```
+
+#### 5.) In Teilaufgaben 4.1 und 4.2 haben wir theoretische Situationen angenommen, in denen verschiedene for-Schleifen sinnvoll sind. Schreibt zu jeder der beiden Teilaufgaben eine Beispielschleife. 
+
+```{r 4_5, exercise=TRUE}
+
+
+```
+
+```{r 4_5-solution}
+# Musterlösung 
+
+# Beispiel zu Aufgabe 4.1: 
+for (i in seq_along(zahlen)) {
+  if (zahlen[i] == 5) {
+    zahlen[i] <- zahlen[i] * 2
+  }
+}
+
+# Beispiel zu Aufgabe 4.2: 
+zahlen <- c(1, 3, 5, 1, 9)
+
+for (zahl in zahlen) {
+  if (zahl == 5) {
+    print("Zahl 5 gefunden!")
+  }
+}
+
+```
+
+## Aufgabe 5: Wiederholung Funktionen
+
+#### 1.) Was sind Parameter und Rückgabewert der folgenden Funktion? 
+
+```{r 5_1, exercise=TRUE}
+berechne_flaeche <- function(____) {
+  flaeche <- laenge * breite
+  return(____)
+}
+
+```
+```{r 5_1-solution}
+
+berechne_flaeche <- function(laenge, breite) {
+  flaeche <- laenge * breite
+  return(flaeche)
+}
+
+```
+
+```{r 5_1-check}
+
+grade_this_code(allow_partial_matching = TRUE)
+
+```
+
+#### 2.) Ist die folgende Funktion vektorisiert?
+
+```{r eval=FALSE, echo=TRUE}
+celsius_zu_fahrenheit <- function(temperatur_celsius) {
+  temperatur_fahrenheit <- temperatur_celsius * 9 / 5 + 32
+  return(temperatur_fahrenheit)
+}
+
+```
+```{r quiz5_2}
+quiz(
+  caption = "",
+  question_radio("",
+    answer("Ja", correct = TRUE),
+    answer("Nein"),
+    incorrect = "Leider nicht richtig. Richtig wäre: Ja", 
+    correct = "Super, das ist richtig!",
+    message = "Der Funktion celsius_zu_fahrenheit kann beim Aufruf auch ein Vektor als Argument übergeben werden.",
+    allow_retry = FALSE
+  )
+)
+
+```
+
+#### 3.) Angenommen, wir haben einen Dataframe `df` und wir wollen eine neue Spalte `verfuegbarkeit` hinzufügen. In der Spalte soll der Wert `"sofort lieferbar"` stehen, wenn in einer anderen Spalte `auf_lager` ein Wert größer als 0 steht, und sonst `"bestellbar"`. Das kann mit einer Anweisung der Form `df$verfuegbarkeit <- ifelse()` erreicht werden. Welche Argumente müssen der Funktion `ifelse()` übergeben werden, um das Problem zu lösen?
+
+```{r 5_3, exercise=TRUE}
+df <- data.frame(produkt=c("Schuhe", "T-Shirt"),
+                 auf_lager=c(0, 8))
+
+df$verfuegbarkeit <- ifelse(____)
+
+```
+```{r 5_3-solution}
+df <- data.frame(produkt=c("Schuhe", "T-Shirt"),
+                 auf_lager=c(0, 8))
+
+df$verfuegbarkeit <- ifelse(df$auf_lager > 0, "sofort lieferbar", "bestellbar")
+
+```
+
+```{r 5_3-check} 
+
+grade_this_code(allow_partial_matching = TRUE)
+
+```
+
+#### 4.) Der folgende Code berechnet für drei verschiedene Sparguthaben den Endbetrag nach einer festgelegten Anzahl von Jahren und einem festen Zinssatz. Schreibt den Code als Funktion um und ruft anschließend die Funktion mit geeigneten Argumenten auf.
+
+```{r eval=FALSE, echo=TRUE}
+sparguthaben <- c(1000, 1500, 2000) # Anfangsguthaben
+zinssatz <- 0.05 # 5% Zinssatz
+jahre <- 3 # Anzahl der Jahre
+
+endbetraege <- c()
+for (i in seq_along(sparguthaben)) {
+  endbetraege[i] <- sparguthaben[i] * (1 + zinssatz) ^ jahre
+}
+print(endbetraege)
+```
+
+```{r 5_4, exercise=TRUE}
+
+
+```
+
+```{r 5_4-solution}
+# Musterlösung 
+
+# Eine mögliche Funktionsdefinition
+berechne_endbetrag <- function(sparguthaben, zinssatz, jahre) {
+  endbetraege <- c()
+  for (i in seq_along(sparguthaben)) {
+    endbetraege[i] <- sparguthaben[i] * (1 + zinssatz) ^ jahre
+  }
+  return(endbetraege)
+}
+
+# Eine alternative Funktionsdefinition
+endbetraege_berrechnen <- function(sparguthaben, zinssatz, jahre) {
+  endbetraege <- sparguthaben * (1 + zinssatz) ^ jahre
+  return(endbetraege)
+}
+
+# Funktion aufrufen
+ergebnis <- berechne_endbetrag(c(1000, 1500, 2000), 0.05, 3)
+print(ergebnis)
+
+```
+
+## Abfrage zum Wiederholungsbedarf
+
+Bitte antwortet ehrlich auf die folgenden Fragen. Das hilft mir, mein Seminar für das kommende Semester zu verbessern.
+
+```{r wdhbedarf_frage1}
+question_text(
+  "Haben die Aufgaben auf diesem Übungsblatt geholfen, den Stoff aus den letzten Stunden zu verstehen?",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+```{r wdhbedarf_frage2}
+question_text(
+  "Welches Thema oder welche Themen sind euch ggf. immer noch unklar?",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+
+```{r wdhbedarf_frage3}
+question_text(
+  'Welche Arten von Übungsaufgaben aus den letzten Übungszetteln fandet ihr besonders hilfreich? Welche Art von Aufgaben fandet ihr eher nicht so hilfreich? Mit "Arten von Übungsaufgaben" meine ich z.B. Praxisaufgaben, Begriffe in eigenen Worten erläutern, Code erklären, Multiple Choice Aufgaben.',
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
