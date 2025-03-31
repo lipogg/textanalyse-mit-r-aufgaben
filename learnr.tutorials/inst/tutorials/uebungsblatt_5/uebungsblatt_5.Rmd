@@ -1,0 +1,411 @@
+---
+title: "Übungsblatt Nr. 5"
+author: "Textanalyse mit R - Lisa Poggel"
+date: "Abgabe bis 28.10.2024, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
+output: 
+  learnr::tutorial:
+    language: de
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tutorial.helpers)
+library(learnr.tutorials) # for custom_question_text function
+gradethis::gradethis_setup()
+knitr::opts_chunk$set(echo = FALSE, tidy = FALSE)
+```
+
+
+## Aufgabe 1: Wiederholung
+
+Lest euch nochmal die Inhalte zur Sitzung heute unter dem neuen Kapitel "R Basics III" auf unserer [Kurs-Website](https://lipogg.github.io/textanalyse-mit-r/) durch. Formuliert ein bis drei Fragen zu einem Inhalt, der euch noch nicht ganz klar ist.
+
+```{r manual_frage1}
+question_text(
+  "Frage 1:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r manual_frage2}
+question_text(
+  "Frage 2:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r manual_frage3}
+question_text(
+  "Frage 3:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+
+## Aufgabe 2: Verständnis 
+
+#### 1.) Was sind Funktionsname, Parameter, Funktionskörper und Rückgabewert der folgenden Funktionen? Zur Erinnerung: `%%` ist der modulo-Operator. Er berechnet den Rest bei einer Division. Kopiert einfach den entsprechenden Teil aus der Funktionsdefinition und fügt ihn in das Antwortfeld ein. 
+
+```{r eval=FALSE, echo=TRUE}
+# Funktion 1
+ist_gerade <- function(zahl) {
+  if (zahl %% 2 == 0) {
+    print("Zahl ist gerade")
+    return(NULL)
+  } else {
+    print("Zahl ist ungerade")
+    return(NULL)
+  }
+}
+
+```
+```{r q2_1_1_Fktsname}
+question_text(
+  "Funktionsname",
+  answer("ist_gerade", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Richtig wäre: ist_gerade",
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r q2_1_1_Parameter}
+question_text(
+  "Parameter",
+  answer("zahl", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Richtig wäre: zahl",
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r q2_1_1_Fktskoerper}
+question_text(
+  "Funktionskörper",
+  answer_fn(function(value) {
+    normalize <- function(x) gsub("\\s+", "", x)
+
+    solution_variants <- c(
+      'if (zahl %% 2 == 0) {
+        print("Zahl ist gerade")
+        return(NULL)
+      } else {
+        print("Zahl ist ungerade")
+        return(NULL)
+      }'
+    )
+
+    user_clean <- normalize(value)
+    solution_clean <- vapply(solution_variants, normalize, character(1))
+
+    if (user_clean %in% solution_clean) {
+      return(mark_as(TRUE))
+    } else {
+      return(mark_as(FALSE))
+    }
+  }),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Der Funktionskörper ist alles zwischen den äußeren geschweiften Klammern.",
+  allow_retry = FALSE,
+  placeholder = "Antwort eingeben..."
+)
+
+```
+
+```{r eval=FALSE, echo=TRUE}
+# Funktion 2
+ist_gerade <- function(zahl) {
+  if (zahl %% 2 == 0) {
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
+```
+```{r q2_1_2_Fktsname}
+question_text(
+  "Funktionsname",
+  answer("ist_gerade", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Richtig wäre: ist_gerade",
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r q2_1_2_Parameter}
+question_text(
+  "Parameter",
+  answer("zahl", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Richtig wäre: zahl",
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r q2_1_2_Fktskoerper}
+question_text(
+  "Funktionskörper",
+  answer_fn(function(value) {
+    normalize <- function(x) gsub("\\s+", "", x)
+
+    solution_variants <- c(
+      '
+      if (zahl %% 2 == 0) {
+        return(TRUE)
+      } else {
+        return(FALSE)
+      }
+      '
+    )
+
+    user_clean <- normalize(value)
+    solution_clean <- vapply(solution_variants, normalize, character(1))
+
+    if (user_clean %in% solution_clean) {
+      return(mark_as(TRUE))
+    } else {
+      return(mark_as(FALSE))
+    }
+  }),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Der Funktionskörper ist alles zwischen den äußeren geschweiften Klammern.",
+  allow_retry = FALSE,
+  placeholder = "Antwort eingeben..."
+)
+```
+
+```{r eval=FALSE, echo=TRUE}
+# Funktion 3
+ist_gerade <- function(zahl) {
+  gerade <- zahl %% 2 == 0
+  return(gerade)
+}
+
+```
+```{r q2_1_3_Fktsname}
+question_text(
+  "Funktionsname",
+  answer("ist_gerade", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Richtig wäre: ist_gerade",
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r q2_1_3_Parameter}
+question_text(
+  "Parameter",
+  answer("zahl", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Richtig wäre: zahl",
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r q2_1_3_Fktskoerper}
+question_text(
+  "Funktionskörper",
+  answer_fn(function(value) {
+    normalize <- function(x) gsub("\\s+", "", x)
+
+    solution_variants <- c(
+      '
+      gerade <- zahl %% 2 == 0
+      return(gerade)
+      '
+    )
+
+    user_clean <- normalize(value)
+    solution_clean <- vapply(solution_variants, normalize, character(1))
+
+    if (user_clean %in% solution_clean) {
+      return(mark_as(TRUE))
+    } else {
+      return(mark_as(FALSE))
+    }
+  }),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Der Funktionskörper ist alles zwischen den äußeren geschweiften Klammern.",
+  allow_retry = FALSE,
+  placeholder = "Antwort eingeben..."
+)
+```
+
+```{r eval=FALSE, echo=TRUE}
+# Funktion 4
+ist_gerade <- function(zahl) {
+  zahl %% 2 == 0
+}
+
+```
+```{r q2_1_4_Fktsname}
+question_text(
+  "Funktionsname",
+  answer("ist_gerade", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Richtig wäre: ist_gerade",
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r q2_1_4_Parameter}
+question_text(
+  "Parameter",
+  answer("zahl", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Richtig wäre: zahl",
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r q2_1_4_Fktskoerper}
+question_text(
+  "Funktionskörper",
+  answer_fn(function(value) {
+    normalize <- function(x) gsub("\\s+", "", x)
+
+    solution_variants <- c('zahl %% 2 == 0')
+
+    user_clean <- normalize(value)
+    solution_clean <- vapply(solution_variants, normalize, character(1))
+
+    if (user_clean %in% solution_clean) {
+      return(mark_as(TRUE))
+    } else {
+      return(mark_as(FALSE))
+    }
+  }),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Der Funktionskörper ist alles zwischen den äußeren geschweiften Klammern.",
+  allow_retry = FALSE,
+  placeholder = "Antwort eingeben..."
+)
+```
+
+
+#### 2.) Fügt über jeder Zeile im folgenden Code einen Kommentar hinzu, der in euren eigenen Worten beschreibt, was in der jeweiligen Zeile passiert. Geht davon aus, dass die Funktion mit der Definition 2, 3 oder 4 aufgerufen wird. Wenn ihr alle Kommentare hinzugefügt habt, führt den Code durch Klick auf "Code ausführen" einmal aus. Erst dann sind eure Kommentare gespeichert. Durch Klick auf "Lösung" könnt ihr euch nach der Bearbeitung eine Beispiellösung anschauen.
+
+```{r zahl, exercise=TRUE, exercise.eval=FALSE, tidy = FALSE}
+ist_gerade(3)
+zahl <- 8
+zahl_gerade <- ist_gerade(zahl)
+if (zahl_gerade) {
+  zahl / 2
+}
+```
+
+```{r zahl-solution}
+# Funktion ist_gerade() mit Argument 3 aufrufen
+ist_gerade(3)
+# Numeric 8 dem Namen zahl zuweisen
+# Oder: Variable zahl erstellen
+zahl <- 8
+# Rückgabewert der Funktion ist_gerade() dem Namen zahl_gerade zuweisen
+zahl_gerade <- ist_gerade(zahl)
+# if-Anweisung: Wenn Wert der Variable zahl_gerade TRUE ist, Wert der Variable zahl durch 2 teilen
+if (zahl_gerade) {
+  zahl / 2
+}
+```
+
+#### 3.) Verkettet die folgenden Funktionsaufrufe mit dem Pipe-Operator. Der Pipe-Operator wird auf der Kurswebsite im Abschnitt 4.13 vorgestellt. 
+
+*Hinweis: Verwendet in dieser Aufgabe den "einfachen" Pipe-Operator `|>`, der mit R vorinstalliert ist.*
+
+```{r eval=FALSE, echo=TRUE}
+woerter <- c("Haus", "Baum", "Sonne", "Gras") 
+anzahl_buchstaben <- sum(nchar(c(woerter, "Blumen")))
+```
+
+
+```{r pipe, exercise=TRUE}
+
+```
+
+```{r pipe-solution, exercise.reveal_solution = FALSE}
+# solution1 ----
+woerter <- c("Haus", "Baum", "Sonne", "Gras")
+anzahl_buchstaben <- c(woerter, "Blumen") |>
+  nchar() |>
+  sum()
+
+# solution2 ----
+woerter <- c("Haus", "Baum", "Sonne", "Gras")
+
+anzahl_buchstaben <- c(woerter, "Blumen") |>
+  nchar() |>
+  sum()
+
+# solution3 ----
+woerter <- c("Haus", "Baum", "Sonne", "Gras")
+anzahl_buchstaben <- woerter |>
+  c("Blumen") |>
+  nchar() |>
+  sum()
+
+# solution4 ----
+woerter <- c("Haus", "Baum", "Sonne", "Gras")
+
+anzahl_buchstaben <- woerter |>
+  c("Blumen") |>
+  nchar() |>
+  sum()
+```
+
+```{r pipe-code-check} 
+# pipe-code-check nicht pipe-check!
+
+# grade_this_code() prüft Äquivalenz des Ergebnisses und gibt TRUE zurück auch wenn kein Pipe-Operator verwendet wird. Außerdem: Problem bei Verwendung mit code-check: https://github.com/rstudio/gradethis/issues/362
+# grade_this_code()
+
+grade_this({
+  if (.user_code %in% .solution_code_all) {
+    pass("Super, das ist richtig!")
+  } else {
+    fail("Nicht ganz richtig. Versuch es nochmal.")
+  }
+  })
+
+```
+
+
+## Aufgabe 3: Praxis
+
+1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nummer des Übungsblatts und euren Namen.  
+
+2.) Definiert eine Funktion mit dem Namen `increment_vector`, die einen Vektor als Argument annimmt und im Funktionskörper alle Elemente des Vektors mit 1 addiert. Der so "inkrementierte" Vektor soll zuletzt als Rückgabewert zurückgegeben werden. Hinweis: Bei der Addition könnt ihr euch wieder das Prinzip der Vektorisierung zunutze machen. 
+
+3.) Ruft eure Funktion `increment_vector` mit einem beliebigen numeric-Vektor als Argument auf. 
+
+4.) Ihr wollt jetzt eure Funktion `increment_vector` verbessern: Es kann schließlich sein, dass beim Funktionsaufruf ein Argument übergeben wird, das kein Zahlenvektor ist. Dieser Fall soll im Funktionskörper gesondert behandelt werden. Fügt dazu eine if-else-Verzweigung hinzu: wenn das Argument ein Objekt vom Typ "double" ist, dann sollen die Anweisungen im Funktionskörper wie in Teilaufgabe 2) ausgeführt werden. Wenn das Argument jedoch nicht vom Typ "double" ist, soll eine Nachricht ausgegeben werden, "Argument ist kein gültiger Vektor". Dazu kann anstelle von `return("Irgendeine Nachricht")` die Funktion `stop("Irgendeine Nachricht")` verwendet werden. Diese Funktion wird dazu verwendet, die Ausführung einer Funktion abzubrechen und eine Fehlermeldung auszugeben. Wenn ihr etwas herausgefordert werden wollt, versucht, die Nachricht so zu schreiben, dass beim Funktionsaufruf für "Argument" jeweils das Argument aus dem aktuellen Funktionsaufruf eingesetzt wird. Hinweis: Wenn ihr euch nicht mehr daran erinnert, mit welcher Funktion man überprüfen kann, welchen Typ ein Objekt in R hat, schaut im Kapitel R Basics I nach. 
+
+5.) Ruft eure Funktion `increment_vector` einmal mit einem beliebigen numeric-Vektor als Argument auf und einmal mit einem character-Vektor. Funktioniert alles?
+
+6.) Definiert zuletzt eine weitere Funktion, die zwei Vektoren als Argumente annimmt und diese zu einem neuen Vektor zusammenfügt. Der Rückgabewert soll der neue Vektor sein, der alle Elemente aus den beiden Input-Vektoren enthält. Ruft eure Funktion danach mit geeigneten Argumenten auf, um sie zu testen. 
+
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
