@@ -1,0 +1,209 @@
+---
+title: "Übungsblatt Nr. 8"
+author: "Textanalyse mit R - Lisa Poggel"
+date: "Abgabe bis 28.10.2024, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
+output: 
+  learnr::tutorial:
+    language: de
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tutorial.helpers)
+library(learnr.tutorials) # for custom_question_text function
+
+knitr::opts_chunk$set(echo = FALSE, tidy = FALSE)
+```
+
+
+## Wichtiger Hinweis 
+
+In dieser Woche sollt ihr euch mit den zwei neuen Kapiteln "Exkurs: Reguläre Ausdrücke" und "Textanalyse II"  vertraut machen. 
+
+* Die Kapitel  "Textanalyse I", "Textanalyse II" und "Exkurs: Reguläre Ausdrücke" sind als Referenz gedacht. In diesen Kapiteln könnt ihr immer nachschlagen, wenn ihr Code zum Erstellen von readtext- und quanteda-Objekten oder zum Preprocessing sucht. 
+* Im Kapitel "Textanalyse III", das in der nächsten Woche hinzukommt, wird der Code aus diesen drei Kapiteln immer wieder verwendet. Neu hinzu kommt nur der Code für Analyse und Visualisierung, und hin und wieder mal ein paar zusätzliche Verarbeitungsschritte.
+
+Wenn ihr in der vergangenen Woche den Text zur Textanalyse von Jünger und Gärtner gelesen habt, sollte es euch etwas leichter fallen, den Überblick zu bewahren. Solltet ihr den Text noch nicht gelesen haben, lest ihn diese Woche. **Wenn es euch zu viel wird, überspringt erst einmal das Kapitel "Exkurs: Reguläre Ausdrücke" sowie die Aufgabe 1.2.**
+
+
+## Aufgabe 1: Verständnis
+
+#### 1.) Beantwortet kurz die folgenden Fragen mithilfe der zwei neuen Kapitel. Ein Satz reicht als Antwort. 
+
+```{r q1_1_1}
+question_text(
+  "Was ist der Unterschied zwischen Stemming und Lemmatisierung?",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE,
+  message = "Beim Stemming werden Wortendungen nach bestimmten Regeln entfernt. Beim Lemmatisieren werden Wörter dagegen mithilfe von Wörterbüchern oder Methoden des maschinellen Lernens auf ihre Grundform zurückgeführt."
+)
+```
+
+```{r q1_1_2}
+question_text(
+  "Was sind reguläre Ausdrücke?",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE,
+  message = "Reguläre Ausdrücke (oder engl. Regular Expression, kurz: RegEx, RegExp) sind verallgemeinerte Suchmuster (patterns) für Zeichenketten. Mithilfe von regulären Ausdrücken können syntaktische Konstrukte so beschrieben werden, dass sie ein Computer versteht. Ein syntaktisches Konstrukt ist zum Beispiel eine Zahl zwischen 1900 und 2000, eine Telefonnummer, eine Adresse, eine URL oder auch ein bestimmtes Wort in verschiedenen Flexionsformen. Mithilfe von regulären Ausdrücken können also Texte nach bestimmten Mustern durchsucht werden, und die gefundenen Konstrukte können anschließend z.B. entfernt oder bearbeitet werden."
+)
+```
+
+```{r q1_1_3}
+question_text(
+  "Was macht die R-base-Funktion gsub()?",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE,
+  message = "Die Funktion gsub() durchsucht eine Zeichenkette nach Übereinstimmungen mit einem regulären Ausdruck und ersetzt alle Vorkommen durch eine angegebene Zeichenkette."
+)
+```
+
+```{r q1_1_4}
+question_text(
+  'Was sind im readtext- und quanteda-Kontext "docvars"?',
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE,
+  message = "Metadaten auf Dokumentenebene, z.B. Autor:in, Titel und Publikationsjahr eines Textes."
+)
+```
+
+```{r q1_1_5}
+question_text(
+  "Worauf ist bei der Entfernung von Stoppwörtern zu achten? ",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE,
+  message = 'Stoppwörter sind die Wörter, die im Kontext eines konkreten Textanalyseprojekts als nicht bedeutungstragend angesehen werden und besonders häufig vorkommen. Das sind in den meisten Analysen vor allem Funktionswörter. Es gibt aber auch Fragestellungen, für die genau solche Wörter interessant sind, oder Texte, für die keine vordefinierte Stoppwortliste verwendet werden kann. Beim Aufruf der Quanteda-Funktion tokens_remove(pattern = stopwords("de")) wird eine vordefinierte Stoppwortliste aus dem Internet heruntergeladen. Diese Liste muss für historische Texte und je nach Fragestellung angepasst werden.'
+)
+```
+ 
+#### 2.) Angenommen, ihr möchtet ein Korpus deutschsprachiger Zeitungsartikel analysieren. Eure Forschungsfrage lautet: "Mit welchen Adjektiven wird der Anschlag auf das World Trade Center am 11. September 2001 in verschiedenen Zeitungsartikeln beschrieben?". Ihr möchtet dazu zunächst die Texte nach allen Erwähnungen des Ereignisses durchsuchen und danach mithilfe von POS-Tagging und Dependency Parsing (das lernt ihr etwas später kennen) alle Adjektive suchen, die sich auf das Ereignis beziehen. Sollten beim Preprocessing Satzzeichen, Sonderzeichen und Zahlen entfernt werden? Geht davon aus, dass diese für POS-Tagging und Dependency Parsing nicht notwendig sind. 
+
+```{r q1_2}
+question_text(
+  "",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE,
+  message = "Zur Beantwortung dieser Frage müsst ihr euch erst einmal überlegen, welche Textoberflächenphänomene das gesuchte Ereignis beschreiben. Neben dem 11. September 2001 wären das z.B. verkürzte Schreibweisen wie 9/11, Sept.11, 11.09. Zahlen sollten nicht entfernt werden, weil ohne die Zahlen solche Muster nicht mehr gefunden werden können. Und auch das Entfernen von Satzzeichen und Sonderzeichen birgt in diesem Fall Risiken: 911 könnte bspw. auch für die Notruf-Telefonnummer stehen; das bereinigte Muster 11 09 könnte dagegen mit einer Zeitangabe 11:09 verwechselt werden."
+)
+```
+
+3.) (fakultativ) Angenommen, wir durchsuchen mithilfe der folgenden regulären Ausdrücke den Text "Am 1.1.2024 ist die Sonne um 5 Uhr morgens aufgegangen. Um 6:00 war es nebelig und um 12 Uhr hat es geregnet." Welche Zahlen werden jeweils gefunden? 
+
+
+```{r q1_3_1}
+custom_question_text(
+  text = "[0-9]", 
+  variants = c("1 1 2 0 2 4 5 6 0 0 1 2"), 
+  incorrect_msg = "Findet eine Zahl zwischen 0 und 9: 1, 1, 2, 0, 2, 4 (Datum 1.1.2024), 5 (5 Uhr morgens), 6, 0, 0 (6:00), 1, 2 (12 Uhr)"
+  )
+```
+
+```{r q1_3_2}
+custom_question_text(
+  text = "[0-9]{2}", 
+  variants = c("20 02 24 00 12"), 
+  incorrect_msg = "Findet zwei Zahlen: 20, 02, 24 (2024), 00 (6:00), 12 (12 Uhr)"
+  )
+```
+
+```{r q1_3_3}
+custom_question_text(
+  text = "[0-9]{2}\\s", 
+  variants = c("24 00 12"), 
+  incorrect_msg = "Findet zwei Zahlen gefolgt von einem Leerzeichen: 24 (2024), 00 (6:00), 12 (12 Uhr)"
+  )
+```
+
+```{r q1_3_4}
+custom_question_text(
+  text = "\\s[0-9]{2}\\s", 
+  variants = c("12"), 
+  incorrect_msg = "Findet zwei Zahlen angeführt und gefolgt von einem Leerzeichen: 12 (12 Uhr)"
+  )
+```
+
+```{r q1_3_5}
+custom_question_text(
+  text = "[12]", 
+  variants = c("1 1 2 2 1 2"), 
+  incorrect_msg = "Findet eine Zahl, entweder 1 oder 2: 1, 1, 2, 2 (Datum 1.1.2024), 1, 2 (12 Uhr)"
+  )
+```
+
+```{r q1_3_6}
+custom_question_text(
+  text = "12", 
+  variants = c("12"), 
+  incorrect_msg = "Findet die Zahl 12: 12 (12 Uhr)"
+  )
+```
+
+## Aufgabe 2: Praxis 
+
+1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nr. des Übungsblatts und euren Namen.
+
+2.) Setzt euer Arbeitsverzeichnis auf den Ordner, in dem sich der Ordner mit dem Namen "korpus" aus der letzten Stunde befindet.  
+
+*Hinweis: Wie das geht könnt ihr im Abschnitt [5.5 "Textdateien einlesen"](https://lipogg.github.io/textanalyse-mit-r/textanalyse-i-korpus-tokens-daten-und-dateien.html#textdateien-einlesen) nachlesen. Im Kapitel ["Orientierung im RStudio"](https://lipogg.github.io/textanalyse-mit-r/orientierung-im-rstudio.html) findet ihr außerdem einen Screenshot, der erläutert, wie ihr das Arbeitsverzeichnis über die RStudio-Nutzeroberfläche setzen könnt.*
+
+3.) Ladet die Pakete readtext und quanteda. 
+
+4.) Lest alle Texte aus dem Ordner mit dem Namen "korpus" ein und extrahiert dabei die Metadaten aus den Dateinamen. 
+
+*Hinweis: Den Code dazu findet ihr im Abschnitt [5.5](https://lipogg.github.io/textanalyse-mit-r/textanalyse-i-korpus-tokens-daten-und-dateien.html#textdateien-einlesen).*
+
+5.) Findet mithilfe einer geeigneten Zugriffsoperation heraus, wie viele verschiedene Publikationsjahre es unter den eingelesenen Texten gibt. 
+
+*Hinweis: Erinnert euch an den Abschnitt [2.2.5 "Operationen auf Vektoren"](https://lipogg.github.io/textanalyse-mit-r/r-basics-ii-datenstrukturen.html#operationen-auf-vektoren). In diesem Abschnitt wurden zwei verschiedene Möglichkeiten vorgestellt, wie die Anzahl der einzigartigen Werte in einem Vektor bestimmt werden kann. Welche waren das?* 
+
+6.) Erstellt aus den eingelesenen Texten ein Quanteda corpus-Objekt mit einem geeigneten Namen.
+
+7.) Erstellt mithilfe der Funktion `corpus_subset()` ein Teilkorpus, das nur die Märchen von Arthur Schnitzler enthält. 
+
+*Hinweis: Den Code dazu findet ihr im Abschnitt [5.7 "Quanteda corpus-Objekte"](https://lipogg.github.io/textanalyse-mit-r/textanalyse-i-korpus-tokens-daten-und-dateien.html#quanteda-corpus-objekte).* 
+
+8.) Lasst euch mithilfe der Funktion `summary()` Informationen zum Schnitzler-Teilkorpus ausgeben. Findet mithilfe einer geeigneten Zugriffsoperation anschließend heraus, wie viele Texte mehr als 40000 Tokens haben. Findet zuletzt mithilfe einer geeigneten Zugriffsoperation heraus, welche Texte 1905 geschrieben wurden. 
+
+*Hinweis: Ein Beispiel zur Verwendung der `summary()`-Funktion findet ihr im Abschnitt [5.7 "Quanteda corpus-Objekte"](https://lipogg.github.io/textanalyse-mit-r/textanalyse-i-korpus-tokens-daten-und-dateien.html#quanteda-corpus-objekte). Wenn die `summary()`-Funktion auf ein Quanteda corpus-Objekt angewendet wird, gibt sie einen Dataframe zurück. Zur Lösung dieser Aufgabe können also alle Zugriffsoperationen angewendet werden, die wir im Zusammenhang mit Dataframes kennengelernt haben. Erinnert euch also an die Zugriffsoperationen im Abschnitt [2.7.2 "Operationen auf Dataframes"](https://lipogg.github.io/textanalyse-mit-r/r-basics-ii-datenstrukturen.html#operationen-auf-dataframes).*
+
+9.) Tokenisiert jetzt die Texte. Entfernt dabei KEINE Satzzeichen und Zahlen. 
+
+*Hinweis: Tokenisieren ist einfach ein anderer Begriff für "in Tokens zerlegen" oder "ein tokens-Objekt erstellen". Das Tokenisieren ist eine aufwändige Operation, für die der Computer einige Zeit benötigt. Wartet einfach ab, bis auf der Konsole wieder `>` angezeigt wird.* 
+
+10.) Lemmatisiert die Texte und betrachtet anschließend den UDPipe-Dataframe. Wie gut hat das Lemmatisieren funktioniert? Welche Wörter wurden nicht richtig erkannt? Gibt es NA-Werte? Gibt es Zeilen, in denen mehrere Lemmata stehen? 
+
+*Hinweis: Den Code dazu findet ihr im Abschnitt  [7.7.2](https://lipogg.github.io/textanalyse-mit-r/textanalyse-ii-preprocessing.html#methode-2-lemmatisierung-mit-udpipe).*
+
+11.) Speichert den UDPipe-Dataframe mithilfe der Funktion `saveRDS()` in einer RDS-Datei. 
+
+*Hinweis: Den Code dazu findet ihr ebenfalls im Abschnitt [7.7.2](https://lipogg.github.io/textanalyse-mit-r/textanalyse-ii-preprocessing.html#methode-2-lemmatisierung-mit-udpipe).*
+
+
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
+
