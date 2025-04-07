@@ -25,7 +25,7 @@ Lest euch nochmal das Kapitel "Textanalyse III" auf unserer Kurs-Website durch. 
 
 2.) Ordnet die folgenden Bestandteile einer ggplot2-Grafik ihrer jeweiligen Bedeutung zu: 
 
-![](ggplot.png)
+![](images/ggplot.png)
 
 3.) (fakulativ) Lest den folgenden Text zur Distributional Hypothesis und fasst in zwei Sätzen zusammen, was die Distributional Hypothesis besagt. Erinnert euch an den Beitrag von Evelyn Gius und Janina Jacke aus der ersten Woche. Inwieweit lässt sich die Kritik von Gius und Jacke auf die in dem Kapitel von Lenci und Sahlgren vorgestellten theoretischen Annahmen anwenden? Was denkt ihr: entsprechen die Annahmen der Distributional Hypothesis eurer Vorstellung von Sprache und Bedeutung?  
 

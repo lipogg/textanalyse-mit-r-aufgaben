@@ -26,7 +26,7 @@ Lest euch nochmal die Inhalte zur Sitzung gestern unter dem neuen Kapitel “R B
 
 1.) Welche Datenstrukturen werden durch die Bilder a), b) und c) repräsentiert? 
 
-![](uebung03-sose24.png)
+![](images/datenstrukturen_ub3.png)
 
 2.) Welche Datenstruktur kann am besten zur Abbildung der folgenden Daten verwendet werden? Zur Beantwortung der Frage müsst ihr nur die Datenstruktur nennen, ihr müsst die Beispiele nicht in R implementieren. 
 

@@ -38,10 +38,10 @@ Lest euch nochmal das neue Kapitel "Textanalyse III" auf unserer Kurs-Website du
 \begin{figure}[ht]
 \centering
 \textbf{a)} 
-\includegraphics[width=0.4\textwidth]{matrix_1.png}
+\includegraphics[width=0.4\textwidth]{images/matrix_1.png}
 \hspace{5mm} 
 \textbf{b)} 
-\includegraphics[width=0.4\textwidth]{matrix_2.png}
+\includegraphics[width=0.4\textwidth]{images/matrix_2.png}
 \end{figure}
 
 \vspace{4mm}

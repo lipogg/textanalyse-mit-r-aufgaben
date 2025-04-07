@@ -25,7 +25,7 @@ Erläutert kurz in euren eigenen Worten die folgenden Begriffe: Datenstruktur, E
 
 1.) Welche Datenstrukturen werden durch die Bilder a), b), c) und d) repräsentiert? 
 
-![](uebung02-sose24.png)
+![](images/datenstrukturen_ub2.png)
 
 2.) Welche Indexpositionen und ggf. welchen Namen haben die folgenden Elemente? 
 
