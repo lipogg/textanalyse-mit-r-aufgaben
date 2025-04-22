@@ -61,7 +61,7 @@ question_text(
 
 #### Erläutert kurz in euren eigenen Worten die folgenden Begriffe:
 
-```{r manual_kommentar}
+```{r q2_kommentar}
 question_text(
   "Datenstruktur",
   answer(".*", correct=TRUE),
@@ -69,10 +69,11 @@ question_text(
   incorrect = NULL,
   placeholder = "Antwort eingeben...",
   allow_retry = FALSE,
-  try_again = FALSE
+  try_again = FALSE, 
+  message = "Eine Datenstruktur ist eine strukturierte Sammlung von Werten (oder auch anderen Objekten in R). Verschiedene Datenstrukturen unterscheiden sich darin, wie die Daten organisiert sind und wie sie im Speicher repräsentiert werden."
 )
 ```
-```{r manual_character}
+```{r q2_character}
 question_text(
   "Element",
   answer(".*", correct=TRUE),
@@ -80,10 +81,11 @@ question_text(
   incorrect = NULL,
   placeholder = "Antwort eingeben...",
   allow_retry = FALSE,
-  try_again = FALSE
+  try_again = FALSE,
+  message = "Ein Element ist ein Wert oder ein anderes Objekt innerhalb einer Datenstruktur. Datenstrukturen können selbst Datenstrukturen als Elemente enthalten, z.B. kann eine Liste einen Vektor als Element haben."
 )
 ```
-```{r manual_datentyp}
+```{r q2_datentyp}
 question_text(
   "Index",
   answer(".*", correct=TRUE),
@@ -91,10 +93,11 @@ question_text(
   incorrect = NULL,
   placeholder = "Antwort eingeben...",
   allow_retry = FALSE,
-  try_again = FALSE
+  try_again = FALSE, 
+  message = "Der Index ist eine Zahl, die der Position entspricht, die ein Element innerhalb einer Datenstruktur einnimmt. Mithilfe des Indexes kann auf den Wert an dieser Position zugegriffen werden."
 )
 ```
-```{r manual_variable}
+```{r q2_variable}
 question_text(
   "Zugreifen",
   answer(".*", correct=TRUE),
@@ -102,7 +105,8 @@ question_text(
   incorrect = NULL,
   placeholder = "Antwort eingeben...",
   allow_retry = FALSE,
-  try_again = FALSE
+  try_again = FALSE, 
+  message = "Der Begriff Zugreifen wird im Zusammenhang von Datenstrukturen verwendet und beschreibt eine Operation, bei der ein oder mehrere Elemente aus der Datenstruktur ausgewählt und herausgegriffen werden, zum Beispiel, weil diese betrachtet oder verändert werden sollen."
 )
 ```
 
@@ -113,7 +117,7 @@ question_text(
 ```{r fig1, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("images/a.png")
 ```
-```{r q3_1}
+```{r q3_1_1}
 custom_question_text(
   text = " ", 
   variants = c("Vektor", "Vector", "boolescher Vektor", "boolean vector"),
@@ -124,7 +128,7 @@ custom_question_text(
 ```{r fig2, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("images/b.png")
 ```
-```{r q3_2}
+```{r q3_1_2}
 custom_question_text(
   text = " ", 
   variants = c("Vektor", "Vector", "named vector", "benannter Vektor"),
@@ -135,7 +139,7 @@ custom_question_text(
 ```{r fig3, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("images/c.png")
 ```
-```{r q3_3}
+```{r q3_1_3}
 custom_question_text(
   text = " ", 
   variants = c("Liste", "list"), 
@@ -145,7 +149,7 @@ custom_question_text(
 ```{r fig4, echo = FALSE, out.width = "100%"}
 knitr::include_graphics("images/d.png")
 ```
-```{r q3_4}
+```{r q3_1_4}
 custom_question_text(
   text = " ", 
   variants = c("Liste", "list"), 
