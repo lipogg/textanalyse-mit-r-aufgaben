@@ -56,9 +56,9 @@ question_text(
 
 ## Aufgabe 2: Begriffsklärung
 
-#### 1) Erläutert kurz in euren eigenen Worten die folgenden Begriffe:
+#### Erläutert kurz in euren eigenen Worten die folgenden Begriffe:
 
-```{r manual_kommentar}
+```{r q2_1_kommentar}
 question_text(
   "Kommentar",
   answer(".*", correct=TRUE),
@@ -66,10 +66,11 @@ question_text(
   incorrect = NULL,
   placeholder = "Antwort eingeben...",
   allow_retry = FALSE,
-  try_again = FALSE
+  try_again = FALSE, 
+  message = "Kommentare sind Erläuterungen, die dazu dienen, R Code anderen oder sich selbst zu erklären. Kommentare werden durch ein Rautezeichen # eingeleitet. Sie werden vom Computer nicht ausgeführt."
 )
 ```
-```{r manual_character}
+```{r q2_2_character}
 question_text(
   "character (string)",
   answer(".*", correct=TRUE),
@@ -77,10 +78,11 @@ question_text(
   incorrect = NULL,
   placeholder = "Antwort eingeben...",
   allow_retry = FALSE,
-  try_again = FALSE
+  try_again = FALSE,
+  message = "Character (auch manchmal genannt string, character string oder Zeichenkette) ist die Bezeichnung für einen Datentyp in R. Objekte vom Typ character werden durch Anführungszeichen gekennzeichnet. Alle Zeichen, egal ob Zahlen, Buchstaben, Sonderzeichen oder auch Leerzeichen, die in Anführungszeichen stehen, sind in R character."
 )
 ```
-```{r manual_datentyp}
+```{r q2_3_datentyp}
 question_text(
   "Datentyp",
   answer(".*", correct=TRUE),
@@ -88,10 +90,11 @@ question_text(
   incorrect = NULL,
   placeholder = "Antwort eingeben...",
   allow_retry = FALSE,
-  try_again = FALSE
+  try_again = FALSE, 
+  message = "Der Datentyp eines Objekts in R beschreibt, welche Eigenschaften das Objekt hat und was man damit machen kann. Objekte vom Typ numeric kann man z.B. mithilfe arithmetischer Operatoren verrechnen, aber das geht nicht mit Objekten vom Typ character, weil diese Zeichen repräsentieren und keine numerischen Werte. "
 )
 ```
-```{r manual_variable}
+```{r q2_4_variable}
 question_text(
   "Variable",
   answer(".*", correct=TRUE),
@@ -99,10 +102,11 @@ question_text(
   incorrect = NULL,
   placeholder = "Antwort eingeben...",
   allow_retry = FALSE,
-  try_again = FALSE
+  try_again = FALSE, 
+  message = "Variablen sind Platzhalter für Werte eines bestimmten Datentyps. Sie legen einen Namen fest, der ein Datenobjekt in R sowie dessen Speicherplatz im Computer referenziert. So kann im Programmverlauf immer wieder anhand seines Namens auf dieses Objekt zugegriffen werden. Der Wert der Variable kann sich dabei allerdings verändern, z.B. kann eine Variable zahl, der die Zahl 5 zugewiesen ist, sich im Programmverlauf um einen bestimmten Betrag erhöhen oder verringern."
 )
 ```
-```{r manual_operatorpraezedenz}
+```{r q2_5_operatorpraezedenz}
 question_text(
   "Operatorpräzedenz",
   answer(".*", correct=TRUE),
@@ -110,10 +114,11 @@ question_text(
   incorrect = NULL,
   placeholder = "Antwort eingeben...",
   allow_retry = FALSE,
-  try_again = FALSE
+  try_again = FALSE, 
+  message = "Die Operatorpräzedenz beschreibt eine festgelegte Reihenfolge, in der Ausdrücke in R ausgewertet werden, wenn sie aus mehreren Operatoren bestehen, die sich einen Operanden teilen. Also z.B. teilen sich die Operatoren + und * im Ausdruck 5 + 3 * 4 den Operanden 3."
 )
 ```
-```{r manual_zuweisung}
+```{r q2_6_zuweisung}
 question_text(
   "Zuweisung",
   answer(".*", correct=TRUE),
@@ -121,191 +126,209 @@ question_text(
   incorrect = NULL,
   placeholder = "Antwort eingeben...",
   allow_retry = FALSE,
-  try_again = FALSE
+  try_again = FALSE, 
+  message = 'Eine Zuweisung ist eine Art von Anweisung, bei der ein Name festgelegt wird, der als Platzhalter für ein R Objekt, zum Beispiel einen einzelnen Wert, dienen soll. Durch die Zuweisung wird das Objekt an den Namen "gebunden".'
 )
 ```
 
 ## Aufgabe 3: Verständnis
 
-#### 2) Welchen Datentyp haben die folgenden Objekte?
+#### 1) Welchen Datentyp haben die folgenden Objekte?
 
 ```{r results = FALSE, echo=TRUE}
 TRUE
 ```
-```{r q2_1}
+```{r q3_1_1}
 custom_question_text(
   text = " ", 
-  variants = c("boolean", "bool", "logical", "boolescher Wahrheitswert")
+  variants = c("boolean", "bool", "logical", "boolescher Wahrheitswert"), 
+  incorrect_msg = c("Leider nicht richtig. Richtig wäre: boolean, bool, logical oder boolescher Wahrheitswert.")
   )
 
 ```
 ```{r results = FALSE, echo=TRUE}
 "TRUE"
 ```
-```{r q2_2}
+```{r q3_1_2}
 
 custom_question_text(
   text = " ", 
-  variants = c("string", "character", "character string", "Zeichenkette")
+  variants = c("string", "character", "character string", "Zeichenkette"), 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: string, character, character string oder Zeichenkette."
   )
 
 ```
 ```{r results = FALSE, echo=TRUE}
 12^4
 ```
-```{r q2_3}
+```{r q3_1_3}
 
 custom_question_text(
   text = " ", 
-  variants = c("double", "numerical", "numeric")
+  variants = c("double", "numerical", "numeric"), 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: double, numerical oder numeric."
   )
 
 ```
 ```{r results = FALSE, echo=TRUE}
 " "
 ```
-```{r q2_4}
+```{r q3_1_4}
 
 custom_question_text(
   text = " ", 
-  variants = c("string", "character", "character string", "Zeichenkette")
+  variants = c("string", "character", "character string", "Zeichenkette"), 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: string, character, character string oder Zeichenkette."
   )
 ```
 ```{r results = FALSE, echo=TRUE}
 8
 ```
-```{r q2_5}
+```{r q3_1_5}
 
 custom_question_text(
   text = " ", 
-  variants = c("double", "numerical", "numeric")
+  variants = c("double", "numerical", "numeric"), 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: double, numerical oder numeric."
   )
 
 ```
 ```{r results = FALSE, echo=TRUE}
 "Hallo! Es ist ein schöner Tag heute."
 ```
-```{r q2_6}
+```{r q3_1_6}
 
 custom_question_text(
   text = " ", 
-  variants = c("string", "character", "character string", "Zeichenkette")
+  variants = c("string", "character", "character string", "Zeichenkette"),
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: string, character, character string oder Zeichenkette."
   )
 
 ```
 
-#### 3) Zu welchem Wert werden die folgenden Ausdrücke evaluiert? 
+#### 2) Zu welchem Wert werden die folgenden Ausdrücke evaluiert? 
 
 *Beantwortet die Frage ohne die Hilfe von R und RStudio! Beachtet dabei die Operatorpräzedenz.*
 
 ```{r results = FALSE, echo=TRUE}
 TRUE & FALSE
 ```
-```{r q3_1}
+```{r q3_2_1}
 custom_question_text(
   text = " ", 
   variants = c("False"), 
-  allow_retry=FALSE
+  allow_retry=FALSE, 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: FALSE."
   )
 ```
 ```{r results = FALSE, echo=TRUE}
 FALSE == !TRUE
 ```
-```{r q3_2}
+```{r q3_2_2}
 custom_question_text(
   text = " ", 
   variants = c("True"), 
-  allow_retry=FALSE
+  allow_retry=FALSE,
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: TRUE."
   )
 ```
 ```{r results = FALSE, echo=TRUE}
 TRUE | FALSE 
 ```
-```{r q3_3}
+```{r q3_2_3}
 custom_question_text(
   text = " ", 
   variants = c("True"), 
-  allow_retry=FALSE
+  allow_retry=FALSE, 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: TRUE."
   )
 ```
 ```{r results = FALSE, echo=TRUE}
 "a" == "b" 
 ```
-```{r q3_4}
+```{r q3_2_4}
 custom_question_text(
   text = " ", 
   variants = c("False"), 
-  allow_retry=FALSE
+  allow_retry=FALSE,
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: FALSE."
   )
 ```
 ```{r results = FALSE, echo=TRUE}
 "Hund" != "Hand"
 ```
-```{r q3_5}
+```{r q3_2_5}
 custom_question_text(
   text = " ", 
   variants = c("True"), 
-  allow_retry=FALSE
+  allow_retry=FALSE, 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: TRUE."
   )
 ```
 ```{r results = FALSE, echo=TRUE}
 4 + 5 > 3 + 5
 ```
-```{r q3_6}
+```{r q3_2_6}
 custom_question_text(
   text = " ", 
   variants = c("True"), 
-  allow_retry=FALSE
+  allow_retry=FALSE, 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: TRUE."
   )
 ```
 ```{r results = FALSE, echo=TRUE}
 (4 + 5 > 3 + 5) != (8 + 2 < 6 + 7)
 ```
-```{r q3_7}
+```{r q3_2_7}
 custom_question_text(
   text = " ", 
   variants = c("False"), 
-  allow_retry=FALSE
+  allow_retry=FALSE, 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: FALSE."
   )
 ```
 ```{r results = FALSE, echo=TRUE}
 32 <= 32
 ```
-```{r q3_8}
+```{r q3_2_8}
 custom_question_text(
   text = " ", 
   variants = c("True"), 
-  allow_retry=FALSE
+  allow_retry=FALSE, 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: TRUE."
   )
 ```
 ```{r results = FALSE, echo=TRUE}
 50 >= 60
 ```
-```{r q3_9}
+```{r q3_2_9}
 custom_question_text(
   text = " ", 
   variants = c("False"), 
-  allow_retry=FALSE
+  allow_retry=FALSE, 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: FALSE."
   )
 ```
 ```{r results = FALSE, echo=TRUE}
 32 <= 32 & 50 >= 60
 ```
-```{r q3_10}
+```{r q3_2_10}
 custom_question_text(
   text = " ", 
   variants = c("False"), 
-  allow_retry=FALSE
+  allow_retry=FALSE, 
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: FALSE."
   )
 ```
 ```{r results = FALSE, echo=TRUE}
 "Katze" == 6 + 7 & TRUE
 ```
-```{r q3_11}
+```{r q3_2_11}
 custom_question_text(
   text = " ", 
   variants = c("False"), 
-  allow_retry=FALSE
+  allow_retry=FALSE,
+  incorrect_msg = "Leider nicht richtig. Richtig wäre: FALSE."
   )
 ```
 
