@@ -12,6 +12,7 @@ runtime: shiny_prerendered
 library(learnr)
 library(tutorial.helpers)
 library(learnr.tutorials) # for custom_question_text function
+library(gradethis)
 gradethis::gradethis_setup()
 knitr::opts_chunk$set(echo = FALSE, tidy = FALSE)
 ```
