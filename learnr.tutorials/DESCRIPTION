@@ -13,5 +13,7 @@ Suggests:
     learnr
 Imports: 
     tutorial.helpers
+    gradethis
 Remotes: 
     lipogg/tutorial.helpers
+    rstudio/gradethis
