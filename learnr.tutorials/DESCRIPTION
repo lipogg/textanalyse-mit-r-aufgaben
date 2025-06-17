@@ -15,5 +15,5 @@ Imports:
     gradethis,
     sortable
 Remotes: 
-    lipogg/tutorial.helpers
+    lipogg/tutorial.helpers,
     rstudio/gradethis
