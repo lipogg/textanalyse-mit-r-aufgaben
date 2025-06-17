@@ -1,7 +1,6 @@
 ---
 title: "Übungsblatt Nr. 6"
 author: "Textanalyse mit R - Lisa Poggel"
-date: "Abgabe bis 28.10.2024, 23:59 Uhr per Mail: l.poggel@fu-berlin.de"
 output: 
   learnr::tutorial:
     language: de
