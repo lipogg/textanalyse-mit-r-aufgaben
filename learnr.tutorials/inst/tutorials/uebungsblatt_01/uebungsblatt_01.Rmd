@@ -1,5 +1,5 @@
 ---
-title: "Übungsblatt Nr. 1"
+title: "Übungsblatt Nr. 01"
 author: "Textanalyse mit R - Lisa Poggel"
 output: 
   learnr::tutorial:
