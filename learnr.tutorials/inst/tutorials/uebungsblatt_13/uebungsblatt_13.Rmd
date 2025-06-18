@@ -1,0 +1,156 @@
+---
+title: "Übungsblatt Nr. 13"
+author: "Textanalyse mit R - Lisa Poggel"
+output: 
+  learnr::tutorial:
+    language: de
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tutorial.helpers)
+
+knitr::opts_chunk$set(echo = FALSE, tidy = FALSE)
+```
+
+## Aufgabe 1: Wiederholung
+
+Lest euch nochmal die Inhalte zur Sitzung heute unter dem neuen Kapitel "Exkurs: Web Scraping und APIs" auf unserer [Kurs-Website](https://lipogg.github.io/textanalyse-mit-r/) durch. Formuliert ein bis drei Fragen zu einem Inhalt, der euch noch nicht ganz klar ist.
+
+```{r manual_frage1}
+question_text(
+  "Frage 1:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r manual_frage2}
+question_text(
+  "Frage 2:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r manual_frage3}
+question_text(
+  "Frage 3:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+
+## Aufgabe 2: XPath und Vorblick
+
+Schreibt XPath-Ausdrücke zur Suche nach folgenden HTML-Elementen. Zur Bearbeitung dieser Aufgabe könnt ihr zum Beispiel die folgenden Ressourcen nutzen:
+
+* Neues Kapitel "Exkurs: XML, TEI und XPath" auf der [Kurs-Website](https://lipogg.github.io/textanalyse-mit-r/). Das Kapitel erläutert die Verwendung von XPath zur Suche in XML-TEI-Dokumenten, aber da HTML und XML aus der selben Sprache hervorgegangen sind, sind die XML-Beispiele direkt auf HTML übertragbar.
+* Tutorial in Videoform mit Beispielen: [https://www.youtube.com/watch?v=0QHmDvc9abs](https://www.youtube.com/watch?v=0QHmDvc9abs)
+* Tutorial in Textform mit Schaubild und Beispielen: [https://www.softwaretestinghelp.com/xpath-writing-cheat-sheet-tutorial-examples/](https://www.softwaretestinghelp.com/xpath-writing-cheat-sheet-tutorial-examples/)
+* Liste der wichtigsten XPath Ausdrücke: [https://www.w3schools.com/xml/xpath_syntax.asp](https://www.w3schools.com/xml/xpath_syntax.asp)
+* XPath Cheatsheet: [https://devhints.io/xpath](https://devhints.io/xpath)
+* XPath Tester: [https://extendsclass.com/xpath-tester.html](https://extendsclass.com/xpath-tester.html)
+
+
+```{r q2_xpath1}
+question_text(
+  "Ein div-Element irgendwo im HTML-Baum",
+  answer("//div", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = 'Leider nicht richtig. Richtig wäre: //div',
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+```{r q2_xpath2}
+question_text(
+  "Ein a-Element mit einem div-Element als Elternelement. Das div-Element ist irgendwo im HTML-Baum",
+  answer("//div/a", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = 'Leider nicht richtig. Richtig wäre: //div/a',
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+```{r q2_xpath3}
+question_text(
+  "Ein img-Element mit dem Attribut `src='https://example.com'`, irgendwo im HTML-Baum",
+  answer("//img[@src='https://example.com']", correct=TRUE),
+  answer('//img[@src="https://example.com"]', correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = "Leider nicht richtig. Richtig wäre: //img[@src='https://example.com']",
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+```{r q2_xpath4}
+question_text(
+  'Ein button-Element mit dem Text "Hier klicken", irgendwo im HTML-Baum',
+  answer('//button[text()="Hier klicken"]', correct=TRUE),
+  answer('//button[contains(text(), "Hier klicken")]', correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = 'Leider nicht richtig. Richtig wäre: //button[text()="Hier klicken"] oder //button[contains(text(), "Hier klicken")]',
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+
+## Aufgabe 3: Projektarbeit 
+
+Beschreibt kurz eure Idee für eine Projektarbeit. Wenn ihr noch keine Idee habt oder keine Projektarbeit für dieses Seminar schreiben wollt, denkt euch ein fiktives Forschungsprojekt aus. Denkt euch dazu eine Fragestellung aus und überlegt, auf  Grundlage welcher Texte sich diese beantworten lassen könnte. Auf die Operationalisierung der Fragestellung müsst ihr dabei noch nicht eingehen. 
+
+* Recherchiert, ob und wenn ja wo und in welchem Dateiformat die gesuchten Texte zur Verfügung stehen (Plaintext, XML-TEI, PDF, eBook-Dateiformate,...). Gibt es die Texte in einem Volltextrepositorium wie wikisource.org, projekt-gutenberg.org, gutenberg.org oder textgridrep.org? Gibt es die Texte im Katalog einer Bibliothek oder eines Online-Archivs? Handelt es sich um "born digital" Textarten wie Kommentare auf einer Social Media Plattform, Userbewertungen auf goodreads.com oder Fanfiction von archiveofourown.org? 
+* Wenn ihr eine oder mehrere Webseiten identifiziert habt, welche die gesuchten Texte bereitstellen, überprüft, ob es die gesuchten Texte als **Data Dump** zur Verfügung gibt. Recherchiert auch, ob vielleicht ein anderes Forschungsprojekt bereits mit diesen Texten gearbeitet hat und ein Korpus zusammengestellt hat. Überprüft dann durch Google-Suche und Suche auf der Webseite der Institution, welche die Texte bereitstellt, ob es vielleicht eine **API** gibt, über die die Daten abgefragt werden können. Dokumentiert das Ergebnis eurer Recherche im Rahmen dieser Übungsaufgabe.   
+* Wenn es eine API gibt, lest den [Abschnitt APIs](https://lipogg.github.io/webscraping-mit-python/chapters/08/subchapters/01_apis.html) auf der Webseite zu meinem Webscraping-Seminar. Wenn es keine API gibt, lest das [Kapitel Einstieg Webscraping](https://lipogg.github.io/webscraping-mit-python/chapters/06/06_intro.html): https://lipogg.github.io/webscraping-mit-python/.
+
+```{r q3_projektarbeit}
+question_text(
+  "",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+## Hinweis zu Aufgabe 4
+
+#### Von den folgenden zwei Praxisaufgaben dürft ihr euch je nach Interesse und Projektarbeit eine zur Bearbeitung auswählen. Die Lösungen reicht ihr wie immer als R-Datei ein.
+
+## Aufgabe 4a: APIs
+
+In dieser Aufgabe sollt ihr den Code im [Abschnitt 11.1 "Beispiel API: DraCor"](https://lipogg.github.io/textanalyse-mit-r/exkurs-web-scraping-und-apis.html#beispiel-api-dracor) reproduzieren. Dazu müsst ihr nur den Code anpassen und die entsprechenden Variablen und die Zugriffsoperationen zur Extraktion der Dramen-Kurztitel ändern. Stellt dazu eine Anfrage an den Endpunkt stage directions (statt wie im Beispiel an den spoken text-Endpunkt) und extrahiert alle Bühnenanweisungen zu Dramen von Molière aus dem französischsprachigen Dramenkorpus. Verseht euren Code mit Kommentaren, die erläutern, was in den einzelnen Zeilen passiert. Nutzt zum Verständnis auch die R Dokumentationsseiten. 
+
+## Aufgabe 4b: Web Scraping
+
+In dieser Aufgabe sollt ihr die Zitate von der Seite https://quotes.toscrape.com/ mithilfe von Web Scraping extrahieren. Zur Bearbeitung dieser Aufgabe könnt ihr den Code im [Abschnitt 11.2 "Beispiel Web Scraping: Wikisource"](https://lipogg.github.io/textanalyse-mit-r/exkurs-web-scraping-und-apis.html#beispiel-web-scraping-wikisource) nutzen, ihr müsst aber natürlich die URL und den XPath-Ausdruck austauschen und die for-Schleife so anpassen, dass in jedem Schleifendurchlauf ein Zitat auf dem Bildschirm ausgegeben wird. Um den XPath-Ausdruck zu schreiben, müsst ihr erst die Struktur der Webseite in den Browser-Entwicklertools betrachten und verstehen, in welchem HTML-Element sich die Zitattexte befinden und welche Attribute erlauben, die HTML-Elemente mit den Zitattexten eindeutig zu identifizieren. 
+
+*Hinweis: Wenn ihr nicht sicher seid, ob euer XPath-Ausdruck die richtigen Elemente findet, könnt ihr den Ausdruck in den Browser-Entwicklertools ausprobieren. Öffnet dazu die Entwicklertools und gebt Strg + F ein, sodass sich in den Entwicklertools eine Suchleiste öffnet. Fügt den XPath-Ausdruck ein und drückt Enter.* 
+
+
+
+
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
