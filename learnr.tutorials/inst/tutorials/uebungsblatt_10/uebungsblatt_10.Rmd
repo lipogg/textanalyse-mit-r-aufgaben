@@ -132,7 +132,7 @@ custom_question_text(
 
 ## Aufgabe 3: Praxis 
 
-**Achtung: Vor der Bearbeitung dieser Aufgaben müsst ihr den Zip-Ordner `maerchen_alle.zip` (s. Blackboard) abspeichern und entpacken. Zur Bearbeitung der Teilaufgaben müsst ihr nur den entsprechenden Code aus dem Kapitel 8 anpassen. Die Aufgaben sollen deswegen auch dabei helfen, den Code, den wir in den letzten Stunden besprochen haben, besser zu verstehen.** 
+**Achtung: Vor der Bearbeitung dieser Aufgaben müsst ihr den Zip-Ordner `maerchen_uebung.zip` (s. Blackboard) abspeichern und entpacken. Zur Bearbeitung der Teilaufgaben müsst ihr nur den entsprechenden Code aus dem Kapitel 8 anpassen. Die Aufgaben sollen deswegen auch dabei helfen, den Code, den wir in den letzten Stunden besprochen haben, besser zu verstehen.** 
 
 1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nr. des Übungsblatts und euren Namen.
 
@@ -201,7 +201,7 @@ Dem Säulendiagramm könnt ihr entnehmen, dass es nur zwei Bigramme mit "schön"
 - $K$ = 2 (weil "Guten Tag" aus zwei Wörtern besteht)
 - $z_r$ = "Guten Tag", "Tag Max", "Max Mustermann", "Mustermann wie", "wie geht", "geht es", "es Ihnen", "Ihnen Guten", "Guten Tag" 
 
-$log(n_i)$ bedeutet hier Logarithmus zur Basis $e$, also $log_e(n_i)$.
+$\log(n_i)$ bedeutet hier Logarithmus zur Basis $e$, also $\log_e(n_i)$.
 
 Hinweise:
 
@@ -230,12 +230,12 @@ $n_i$ sind die Anzahl der Wortkombinationen aus $z_r$, für die der jeweilige Fa
 - $n_3$ = 0 (es gibt keine Wortkombination mit "Tag" an der zweiten Stelle) 
 - $n_4$ = 2 ("Guten Tag" kommt zweimal vor)
 
-Jedes $n_i$ wird noch mit dem "smoothing parameter" addiert (dieser soll verhindern, dass Operationen der Art $log_e(0)$ oder $0^{-1}$ notwendig werden). Der smoothing Parameter ist per Default 0.5.
+Jedes $n_i$ wird noch mit dem "smoothing parameter" addiert (dieser soll verhindern, dass Operationen der Art $\log_e(0)$ oder $0^{-1}$ notwendig werden). Der smoothing Parameter ist per Default 0.5.
 Daraus ergibt sich: $n_1$ = 7.5, $n_2$ = 0.5, $n_3$ = 0.5, $n_4$ = 2.5 
 
 Wenn wir diese Werte in die Formel einsetzen, erhalten wir: 
 
-$\lambda = ((-1)^2\*log_e(7.5)) + ((-1)^1\*log_e(0.5)) + ((-1)^1\*log_e(0.5)) + ((-1)^0\*log_e(2.5))$
+$\lambda = ((-1)^2*\log_e(7.5)) + ((-1)^1*\log_e(0.5)) + ((-1)^1*\log_e(0.5)) + ((-1)^0*\log_e(2.5))$
 
 Und entsprechend für $z$: 
 
