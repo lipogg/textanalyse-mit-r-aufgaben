@@ -131,7 +131,7 @@ custom_question_text(
 
 ## Aufgabe 3: Praxis 
 
-**Achtung: Vor der Bearbeitung dieser Aufgaben müsst ihr den Zip-Ordner `maerchen_uebung.zip` (s. Blackboard) abspeichern und entpacken. Zur Bearbeitung der Teilaufgaben müsst ihr nur den entsprechenden Code aus dem Kapitel 8 anpassen. Die Aufgaben sollen deswegen auch dabei helfen, den Code, den wir in den letzten Stunden besprochen haben, besser zu verstehen.** 
+**Achtung: Vor der Bearbeitung dieser Aufgaben müsst ihr den Zip-Ordner `maerchen_alle.zip` (s. Blackboard) abspeichern und entpacken. Zur Bearbeitung der Teilaufgaben müsst ihr nur den entsprechenden Code aus dem Kapitel 8 anpassen. Die Aufgaben sollen deswegen auch dabei helfen, den Code, den wir in den letzten Stunden besprochen haben, besser zu verstehen.** 
 
 1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nr. des Übungsblatts und euren Namen.
 
