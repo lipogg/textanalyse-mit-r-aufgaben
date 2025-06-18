@@ -309,4 +309,6 @@ der Märchen und das Publikationsjahr aus den Dateinamen.
 11.) (fakultativ) Der Code zum Erstellen der Säulendiagramme im Abschnitt 9.4.3 auf der Kurswebsite wiederholt sich mehrmals und es ändert sich nur der Input-Dataframe und die Beschriftungen der x- und y-Achsen. Wie kann der Code als Funktion umgeschrieben werden, die einen Dataframe und Beschriftungen für die x- und y-Achsen als Argument annimmt?
 
 
+```{r download-answers, child = system.file("child_documents/download_answers.Rmd", package = "tutorial.helpers")}
+```
 
