@@ -16,9 +16,6 @@ gradethis::gradethis_setup(
   pass = "Super, das ist richtig!",
   fail = "Nicht ganz richtig. Versuch es nochmal."
 )
-
-# shared code 
-
 knitr::opts_chunk$set(echo = FALSE, tidy = FALSE)
 ```
 
