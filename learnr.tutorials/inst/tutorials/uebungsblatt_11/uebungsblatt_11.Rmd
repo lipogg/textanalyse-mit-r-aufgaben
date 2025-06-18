@@ -1,0 +1,312 @@
+---
+title: "Übungsblatt Nr. 11"
+author: "Textanalyse mit R - Lisa Poggel"
+output: 
+  learnr::tutorial:
+    language: de
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+library(tutorial.helpers)
+library(learnr.tutorials) # for custom_question_text function
+library(gradethis)
+gradethis::gradethis_setup(
+  pass = "Super, das ist richtig!",
+  fail = "Nicht ganz richtig. Versuch es nochmal."
+)
+knitr::opts_chunk$set(echo = FALSE, tidy = FALSE)
+```
+
+## Aufgabe 1: Wiederholung
+
+Lest euch nochmal die Inhalte zur Sitzung heute unter dem neuen Kapitel "POS Tagging und Dependency Parsing" auf unserer [Kurs-Website](https://lipogg.github.io/textanalyse-mit-r/) durch. Formuliert ein bis drei Fragen zu einem Inhalt, der euch noch nicht ganz klar ist.
+
+```{r manual_frage1}
+question_text(
+  "Frage 1:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r manual_frage2}
+question_text(
+  "Frage 2:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+```{r manual_frage3}
+question_text(
+  "Frage 3:",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "z.B. Was ist ein Datentyp?",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+## Aufgabe 2: Dependency Parsing 
+
+#### Beschreibt auf der Grundlage des folgenden Dataframes die Beziehung zwischen den beiden Wörtern "Königssohn" und "schön". 
+
+*Hinweis: Erläuterungen zu den Kürzeln in der Spalte `dep_rel` findet ihr hier: https://universaldependencies.org/treebanks/de_gsd/index.html#relations. Um zu entscheiden, welches Token Head und welches Dependent ist, könnt ihr die Beispiele auf der Kurswebsite im [Abschnitt 9.4.3](https://lipogg.github.io/textanalyse-mit-r/pos-tagging-und-dependency-parsing.html#analyse-mit-dependency-relations) zu Rate ziehen.*
+
+```{r fig1, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("images/udpipe_uebung.png")
+```
+
+
+```{r quiz1}
+quiz(
+  caption = "",
+  question_radio("Welches Wort ist Head?",
+    answer("Königssohn", correct = TRUE),
+    answer("schön"),
+    incorrect = "Leider nicht richtig. Richtig wäre: Königssohn", 
+    correct = "Super, das ist richtig!",
+    message = "Welches Token head ist, erkennt ihr an der Spalte `head_token_id`. Hier steht die ID des Tokens, das Head des Tokens in der jeweiligen Zeile ist. Die Token-ID kann der Spalte token_id entnommen werden.",
+    allow_retry = FALSE
+  )
+)
+
+```
+
+```{r q2_variable}
+question_text(
+  "Was bedeuten die Kürzel in der Spalte `dep_rel`? ",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+## Aufgabe 3: Datentransformationen
+
+#### 1.) In den letzten beiden Wochen habt ihr die neue Funktion `merge()` zum Zusammenfügen von zwei Dataframes kennengelernt. Erstellt die beiden Dataframes `df_1` und `df_2` im RStudio und kombiniert die Dataframes zur Erinnerung einmal mit `cbind()` und einmal mit `rbind()`.  Beantwortet anschließend die folgenden Fragen. 
+
+*Hinweis: Die Fragen sollen euch vor allem helfen, den Unterschied zwischen der Funktion `merge()` und den beiden Funktionen `rbind()` und `cbind()` zu verstehen. Ihr dürft die merge-Operationen zur Beantwortung der Fragen ausführen, solltet aber erst gründlich überlegen, ob ihr nicht auch so auf die richtige Antwort kommt.* 
+
+
+```{r results = FALSE, echo=TRUE}
+df_1 <- data.frame(token=c("katzen", "hund", "mäuse"),
+                   lemma=c("katze", "hund", "maus"), 
+                   upos=c("NOUN", "NOUN", "NOUN"))
+
+df_2 <- data.frame(token=c("hunde", "pferd", "ratten"),
+                   lemma=c("hund", "pferd", "ratte"), 
+                   upos=c("NOUN", "NOUN", "NOUN"))
+
+```
+
+
+```{r results = FALSE, echo=TRUE}
+# a) 
+merge(df_1, df_2, 
+      by.x = c("token", "lemma", "upos"),
+      by.y = c("token", "lemma", "upos"),
+      all.x = TRUE, 
+      all.y = TRUE, 
+      sort = FALSE)
+# b)
+merge(df_1, df_2, 
+      by.x = c("token", "lemma", "upos"),
+      by.y = c("token", "lemma", "upos"),
+      all.x = TRUE, 
+      all.y = FALSE, 
+      sort = FALSE)
+
+```
+
+```{r quiz2}
+quiz(
+  caption = "",
+  question_radio("Welche der beiden merge-Operationen produziert denselben Output wie die Operation `rbind(df_1, df_2)`? ",
+    answer("Operation a)", correct = TRUE),
+    answer("Operation b)"),
+    incorrect = "Leider nicht richtig. Richtig wäre: Operation a)", 
+    correct = "Super, das ist richtig!",
+    allow_retry = FALSE
+  )
+)
+
+```
+
+```{r results = FALSE, echo=TRUE}
+merge(df_1, df_2, 
+      by.x = c("token"),
+      by.y = c("token"),
+      all.x = TRUE, 
+      all.y = FALSE, 
+      sort = FALSE)
+```
+
+
+```{r q2_1}
+question_text(
+  "Wie viele Spalten hat der resultierende Dataframe? Gib eine Zahl von 0 bis 10 ein.",
+  answer("5", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = 'Leider nicht richtig. Richtig wäre: 5.',
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+
+```{r results = FALSE, echo=TRUE}
+merge(df_1, df_2, 
+      by.x = c("token", "lemma", "upos"),
+      by.y = c("token", "lemma", "upos"),
+      all.x = FALSE, 
+      all.y = FALSE, 
+      sort = FALSE)
+```
+
+```{r q2_2}
+question_text(
+  "Wie viele Zeilen hat der resultierende Dataframe? Gib eine Zahl von 0 bis 10 ein.",
+  answer("0", correct=TRUE),
+  correct = "Super, das ist richtig!",
+  incorrect = 'Leider nicht richtig. Richtig wäre: 5.',
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE
+)
+```
+
+
+#### 2.) Angenommen, wir haben einen Dataframe `df` mit den Spalten `token`, `lemma` und `upos` wie in Teilaufgabe 1. Schreibt die folgenden bedingten Zugriffsoperationen mithilfe der Funktion `subset()` um: 
+
+```{r subset_1, exercise=TRUE}
+df <- data.frame(token=c("katzen", "miauten"),
+                 lemma=c("katze", "miauen"), 
+                 upos=c("NOUN", "ADJ"))
+
+df[df$upos == "NOUN", ]
+```
+```{r subset_1-solution}
+df <- data.frame(token=c("katzen", "miauten"),
+                 lemma=c("katze", "miauen"), 
+                 upos=c("NOUN", "ADJ"))
+
+subset(df, upos == "NOUN")
+```
+```{r subset_1-check} 
+grade_this_code(allow_partial_matching = FALSE)
+```
+
+```{r subset_2, exercise=TRUE}
+df <- data.frame(token=c("katzen", "miauten"),
+                 lemma=c("katze", "miauen"), 
+                 upos=c("NOUN", "ADJ"))
+
+df[grepl("schön", df$token), ]
+```
+```{r subset_2-solution}
+df <- data.frame(token=c("katzen", "miauten"),
+                 lemma=c("katze", "miauen"), 
+                 upos=c("NOUN", "ADJ"))
+
+subset(df, grepl("schön", token))
+```
+```{r subset_2-check} 
+grade_this_code(allow_partial_matching = FALSE)
+```
+
+```{r subset_3, exercise=TRUE}
+df <- data.frame(token=c("katzen", "miauten"),
+                 lemma=c("katze", "miauen"), 
+                 upos=c("NOUN", "ADJ"))
+
+df[df$upos != "NOUN" & df$lemma == "schön", ]
+```
+```{r subset_3-solution}
+df <- data.frame(token=c("katzen", "miauten"),
+                 lemma=c("katze", "miauen"), 
+                 upos=c("NOUN", "ADJ"))
+
+subset(df, upos != "NOUN" & lemma == "schön")
+```
+```{r subset_3-check} 
+grade_this_code(allow_partial_matching = FALSE)
+```
+
+
+#### 3.) Angenommen, zwei Personen haben ihre Ausgaben für verschiedene Aktivitäten aufgeschrieben. Dazu haben sie die folgenden beiden Matrizen matrix_1 und matrix_2 aufgestellt:
+
+```{r fig2, echo = FALSE, out.width = "100%"}
+knitr::include_graphics("images/matrix_addition.png")
+```
+
+#### Sie wollen anschließend die Ausgaben zusammenrechen und haben dafür ein R Skript geschrieben, aber die Operation matrix_1 + matrix_2 produziert eine Fehlermeldung. Warum ist das so? Was müssen die Personen zuerst machen, damit die Matrizen addiert werden können?
+
+```{r q2_3}
+question_text(
+  "",
+  answer(".*", correct=TRUE),
+  correct = NULL,
+  incorrect = NULL,
+  placeholder = "Antwort eingeben...",
+  allow_retry = FALSE,
+  try_again = FALSE, 
+  message = "Nur Matrizen mit denselben Dimensionen können addiert werden. Sie müssen eine der beiden Matrizen deswegen zunächst transponieren, das heißt, sie müssen Zeilen und Spalten vertauschen, damit beide Matrizen dieselbe Dimension haben. Das geht in R mit der Funktion `t()`."
+)
+```
+
+## Aufgabe 4: Praxis
+
+**Achtung: Zur Bearbeitung dieser Aufgaben braucht ihr den Zip-Ordner maerchen_alle.zip, den ihr bereits für das Übungsblatt 10 aus dem Blackboard heruntergeladen habt.** 
+
+1.) Öffnet RStudio. Erstellt ein neues R Skript und speichert es mit einem geeigneten Dateinamen ab. Verfasst einen Kommentar mit dem Namen der Lehrveranstaltung, der Nr. des Übungsblatts und euren Namen.
+
+2.) Setzt euer Arbeitsverzeichnis auf den Ordner, in dem sich der Ordner mit dem Namen "maerchen_alle" befindet. 
+
+3.) Ladet die Pakete readtext, quanteda, quanteda.textplots, udpipe und ggplot2. 
+
+4.) Lest jetzt alle Texte aus dem Ordner mit dem Namen "maerchen_alle" ein. Extrahiert dabei den Titel
+der Märchen und das Publikationsjahr aus den Dateinamen.
+
+*Hinweis: Den Code dazu findet ihr im [Abschnitt 9.4.1](https://lipogg.github.io/textanalyse-mit-r/pos-tagging-und-dependency-parsing.html#korpus-einlesen-und-preprocessing) auf der Kurswebsite.*
+
+5.) Erstellt ein Quanteda corpus-Objekt.
+
+6.) In der Analyse haben wir bisher die Märchen aus dem Jahr 1857 analysiert. Erstellt nun ein Teilkorpus nur mit Märchen aus dem Jahr 1812.
+
+*Hinweis: Den Code dazu findet ihr in den Abschnitten 8.2 oder 9.4.1 auf der Kurswebsite.*
+
+7.) Führt mithilfe der Funktion `udpipe()` Lemmatisierung, POS Tagging und Dependency Parsing durch. Dieser Vorgang kann wieder einige Zeit in Anspruch nehmen. Wenn euer Computer mehrere CPU-Kerne hat, könnt ihr die Ausführung beschleunigen, indem ihr der udpipe-Funktion das zusätzliche Argument `parallel.cores = 4` übergebt. Achtung: 4 ist hier nur ein Beispiel. Es empfiehlt sich, hier nicht alle Kerne anzugeben, sondern mindestens einen weniger als auf eurem Computer vorhanden. Alternativ könnt ihr auch einfach einige der Märchen aus dem Ordner löschen, wenn die Ausführung zu lange dauert. Vergesst nicht, für den resultierenden Dataframe eine Variable zu erstellen! 
+
+*Hinweis: Warum verwenden wir hier die udpipe()-Funktion anstelle der udpipe_annotate()-Funktion wie im Kapitel "Wortfrequenzanalysen"? Weil wir unser Korpus bei dieser Analyse nicht erst mit Quanteda tokenisieren, sondern die Tokenisierung direkt mit UDPipe vornehmen. Dabei verlassen wir uns in diesem Fall einfach auf die Standardeinstellungen des UDPipe-Tokenizers* 
+
+8.) Entfernt Zeilen, in denen in der Spalte lemma NA steht, und bereinigt die Spalte lemma, sodass nur eine der verschiedenen Varianten ausgewählt wird.
+
+*Hinweis: Den Code dazu findet ihr in den Abschnitten [7.7.2](https://lipogg.github.io/textanalyse-mit-r/textanalyse-ii-preprocessing.html#methode-2-lemmatisierung-mit-udpipe), [8.3.2](https://lipogg.github.io/textanalyse-mit-r/textanalyse-iii-wortfrequenzanalysen.html#absolute-h%C3%A4ufigkeiten-und-lemmata) und [9.4.1](https://lipogg.github.io/textanalyse-mit-r/pos-tagging-und-dependency-parsing.html#korpus-einlesen-und-preprocessing) auf der Kurswebsite.* 
+
+9.) Erstellt eine Wortwolke für alle Substantive, die mindestens 20 Mal vorkommen. Vergleicht anschließend eure Wortwolke für die Märchen von 1812 mit der Wortwolke für die Märchen von 1857 im Abschnitt 9.4.2 auf der Kurswebsite. Was fällt euch auf? Kommen in den Märchen dieselben Charaktere vor?
+
+*Hinweis: Dazu müsst ihr nur euren in Teilaufgabe 7 erstellten und in Teilaufgabe 8 bereinigten Dataframe in den Code im [Abschnitt 9.4.2 "Analyse mit POS Tags"](file:///Users/lipogg/Desktop/LV_Textanalyse/textanalyse-mit-r/docs/pos-tagging-und-dependency-parsing.html#analyse-mit-pos-tags) auf der Kurswebsite einsetzen.* 
+
+10.) Erstellt ein Säulendiagramm der Adjektiv-Substantiv Paare für ein Token eurer Wahl nach dem Beispiel im Abschnitt 9.4.3 auf der Kurswebsite. 
+
+*Hinweis: Bevor ihr das Säulendiagramm erstellen könnt, müsst ihr die Daten erst vorbereiten. Folgt dazu einfach den Beispielen im [Abschnitt 9.4.3 "Analyse mit Dependency Relations"](https://lipogg.github.io/textanalyse-mit-r/pos-tagging-und-dependency-parsing.html#analyse-mit-dependency-relations) auf der Kurswebsite. Diese Aufgabe ist bewusst als Herausforderung gedacht.* 
+
+11.) (fakultativ) Der Code zum Erstellen der Säulendiagramme im Abschnitt 9.4.3 auf der Kurswebsite wiederholt sich mehrmals und es ändert sich nur der Input-Dataframe und die Beschriftungen der x- und y-Achsen. Wie kann der Code als Funktion umgeschrieben werden, die einen Dataframe und Beschriftungen für die x- und y-Achsen als Argument annimmt?
+
+
+
