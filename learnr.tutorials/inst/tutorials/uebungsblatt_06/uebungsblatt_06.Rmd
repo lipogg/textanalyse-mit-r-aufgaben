@@ -161,9 +161,9 @@ question_text(
 ```{r q3_2a}
 question_text(
   "...wenn `snack_preise` ein benannter Vektor ist?",
-  answer('snacks["Chips"]', correct=TRUE),
+  answer('snack_preise["Chips"]', correct=TRUE),
   correct = "Super, das ist richtig!",
-  incorrect = 'Leider nicht richtig. Richtig wäre: snacks["Chips"].',
+  incorrect = 'Leider nicht richtig. Richtig wäre: snack_preise["Chips"].',
   placeholder = "Antwort eingeben...",
   allow_retry = FALSE,
   try_again = FALSE
@@ -173,10 +173,10 @@ question_text(
 ```{r q3_2b}
 question_text(
   "...wenn `snack_preise` eine Liste ist?",
-  answer('snacks[["Chips"]]', correct=TRUE),
-  answer('snacks$Chips', correct=TRUE),
+  answer('snack_preise[["Chips"]]', correct=TRUE),
+  answer('snack_preise$Chips', correct=TRUE),
   correct = "Super, das ist richtig!",
-  incorrect = 'Leider nicht richtig. Richtig wäre: snacks[["Chips"]] oder snacks$Chips.',
+  incorrect = 'Leider nicht richtig. Richtig wäre: snack_preise[["Chips"]] oder snacks$Chips.',
   placeholder = "Antwort eingeben...",
   allow_retry = FALSE,
   try_again = FALSE
