@@ -373,6 +373,12 @@ anzahl_buchstaben <- woerter |>
   c("Blumen") |>
   nchar() |>
   sum()
+
+# solution5 ----
+anzahl_buchstaben <- c("Haus", "Baum", "Sonne", "Gras") |>
+  c("Blumen") |>
+  nchar() |>
+  sum()
 ```
 
 ```{r pipe-code-check} 
